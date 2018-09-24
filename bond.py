@@ -31,7 +31,34 @@ class DynArray:
         self.array[self.count] = item
         self.count += 1
 
-da = DynArray()
-for i in range(64):
-    da.append(i)
-    print (da[i])
+    def print_all(self):
+        for i in range(self.count):
+            print (self[i])
+
+    def insert(self,i,itm):
+        if i <= self.count:
+            if self.count == self.capacity:
+                self.resize(2*self.capacity)
+            self.count += 1
+            new_array = self.make_array(self.count)
+            for j in range(self.count):
+                if j == i:
+                    new_array[j] = itm
+                elif j < i:
+                    new_array[j] = self.array[j]
+                elif j > i:
+                    new_array[j] = self.array[j-1]
+            self.array = new_array
+        else:
+            print('в строке не хватает элементов')
+            
+            
+                
+s1 = DynArray()
+s1.append(1)
+s1.append(2)
+s1.append(3)
+s1.print_all()
+s1.insert(3,5)
+print("___________")
+s1.print_all()
