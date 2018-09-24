@@ -1,4 +1,6 @@
 import ctypes
+import random
+import unittest
 
 class DynArray:
 
@@ -69,14 +71,29 @@ class DynArray:
             self.count -= 1
         else:
             print('в строке не хватает элементов')
-                
+
+
+
+class TestMethods(unittest.TestCase):
+    
+    def test_delete(self):
+        s1.delete(5)
+        self.assertTrue(s1[5] != 5)
+
+    def test_insert(self):         
+        s1.insert(0,51)
+        self.assertTrue(s1[0] == 51)
+
+
 s1 = DynArray()
 for i in range(17):
     s1.append(i)
 s1.print_all()
-s1.insert(3,5)
+#s1.insert(3,5)
 print("___________")
-s1.delete(17)
+#s1.delete(17)
 print("___________")
-s1.print_all()
+#s1.print_all()
+if __name__ == '__main__':
+    unittest.main()
 
