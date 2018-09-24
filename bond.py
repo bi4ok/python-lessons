@@ -52,13 +52,31 @@ class DynArray:
         else:
             print('в строке не хватает элементов')
             
-            
+    def delete(self,i):
+        if i < self.count:
+            print(self.count,self.capacity)
+            #self.count -= 1
+            if int(self.capacity//1.5) > 16 and self.count-1 <= int(self.capacity//1.5):
+                self.resize(int(self.capacity//1.5))
+            new_array = self.make_array(self.count)
+            print(self.count,self.capacity)
+            for j in range(self.count-1):
+                if j < i:
+                    new_array[j] = self.array[j]
+                elif j >= i:
+                    new_array[j] = self.array[j+1]
+            self.array = new_array
+            self.count -= 1
+        else:
+            print('в строке не хватает элементов')
                 
 s1 = DynArray()
-s1.append(1)
-s1.append(2)
-s1.append(3)
+for i in range(17):
+    s1.append(i)
 s1.print_all()
 s1.insert(3,5)
 print("___________")
+s1.delete(17)
+print("___________")
 s1.print_all()
+
