@@ -5,7 +5,7 @@ class Stack:
     def pop(self):
         if len(self.stack) == 0:
             return None
-        return self.stack.pop()
+        return self.stack.pop(0)
 
     def push(self, value):
         return self.stack.append(value)  
@@ -31,18 +31,42 @@ class Stack:
             print("balans")
         else:
             print("ne balans")
+
+    def s4et(self,vir):
+        s = vir.split()
+        s1 = Stack()
+        s2 = Stack()
+        for i in range(len(s)):
+            s1.push(s[i])
+            print("add")
+            if s[i] == "+":
+                print("+")
+                while s2.size() > 1:
+                    print(s2.stack[0])
+                    print(s2.stack[1])
+                    s2.stack[0] = s2.pop() + s2.stack[0]
+                    print(s2.stack[0])
+                s1.pop()
+            elif s[i] == "*":
+                print("*")
+                while s2.size() > 1:
+                    print("**")
+                    print(s2.stack[0])
+                    print(s2.stack[1])
+                    s2.stack[0] = s2.pop() * s2.stack[0] 
+                    print(s2.stack[0])
+                s1.pop()
+            elif s[i] == "=":
+                print("Sum = ",s2.stack[0])
+            else:
+                s2.push(int(s1.pop()))
+        
             
 stack = Stack()
-stack.push("(")
-stack.push("(")
-stack.push(")")
-stack.push(")")
-stack.push(")")
-stack.push("(")
-stack.push("(")
-stack.push(")")
-
-print(len(stack.stack))
+stack.push(2)
+stack.push(2)
+x = "8 2 + 5 * 9 + ="
 print("___________")
-stack.balans()
+stack.s4et(x)
+
 
