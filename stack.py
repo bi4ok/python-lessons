@@ -18,16 +18,14 @@ class Stack:
     def size(self):
         return len(self.stack)
 
-    def balans(self):
-        x = 0
-        while self.size() > 0:
-            if self.stack[self.size()-1] == ")":
-                x += 1
-                print("+++",self.pop())
-            elif self.stack[self.size()-1] == "(":
-                x -= 1
-                print("---",self.pop())
-        if x == 0:
+    def balans(self,s1):
+        s2 = Stack()
+        for i in range (len(s1)):
+            if s1[i] == "(":
+                s2.push("(")
+            elif s1[i] == ")":
+                s2.pop()
+        if s2.pop() == None:
             print("balans")
         else:
             print("ne balans")
@@ -38,35 +36,23 @@ class Stack:
         s2 = Stack()
         for i in range(len(s)):
             s1.push(s[i])
-            print("add")
             if s[i] == "+":
-                print("+")
                 while s2.size() > 1:
-                    print(s2.stack[0])
-                    print(s2.stack[1])
-                    s2.stack[0] = s2.pop() + s2.stack[0]
-                    print(s2.stack[0])
+                    s2.push(s2.pop() + s2.pop())
                 s1.pop()
             elif s[i] == "*":
-                print("*")
                 while s2.size() > 1:
-                    print("**")
-                    print(s2.stack[0])
-                    print(s2.stack[1])
-                    s2.stack[0] = s2.pop() * s2.stack[0] 
-                    print(s2.stack[0])
+                    s2.push(s2.pop() * s2.pop())
                 s1.pop()
             elif s[i] == "=":
-                print("Sum = ",s2.stack[0])
+                print("Sum = ",s2.pop())
             else:
                 s2.push(int(s1.pop()))
         
             
 stack = Stack()
-stack.push(2)
-stack.push(2)
-x = "8 2 + 5 * 9 + ="
-print("___________")
-stack.s4et(x)
-
+s = "(()))()"
+s1 = "8 2 + 5 * ="
+stack.s4et(s1)
+stack.balans(s)
 
