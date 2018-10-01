@@ -20,12 +20,14 @@ class Stack:
 
     def balans(self,s1):
         s2 = Stack()
+        for j in range (len(s1)):
+            s2.push(0)    
         for i in range (len(s1)):
             if s1[i] == "(":
                 s2.push("(")
             elif s1[i] == ")":
                 s2.pop()
-        if s2.pop() == None:
+        if s2.size() == len(s1):
             print("balans")
         else:
             print("ne balans")
@@ -51,8 +53,7 @@ class Stack:
         
             
 stack = Stack()
-s = "(()))()"
+s = "(())))(((((((())))))"
 s1 = "8 2 + 5 * ="
 stack.s4et(s1)
 stack.balans(s)
-
