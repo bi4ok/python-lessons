@@ -5,7 +5,7 @@ class Stack:
     def pop(self):
         if len(self.stack) == 0:
             return None
-        return self.stack.pop(0)
+        return self.stack.pop()
 
     def push(self, value):
         return self.stack.append(value)  
@@ -48,14 +48,10 @@ class Stack:
                 print("Sum = ", s2.pop())
             else:
                 s2.push(int(s1.pop()))
-        
-            
-stack = Stack()
-x = "))(("
-st = "8 2 + 5 * ="
-stack.s4et(st)
-stack.balans(x)
-x = "555"
-st = "123"
-s3 = int(x) + 123
-print()
+
+    def chered(self, s1, n):
+        for i in range(n):
+            self.push(s1.pop())
+
+        while self.size() > 0:
+            print(self.pop())
