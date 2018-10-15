@@ -75,7 +75,14 @@ class Orderedlist:
         while Node != None:
             if Node.value == val:
                 return Node
+            elif self.asc is True and Node.value > val:
+                print("Числа нет в списке")
+                return None
+            elif self.asc is False and Node.value < val:
+                print("Числа нет в списке")
+                return None
             Node = Node.next
+        print("Числа нет в списке")
         return None
 
     def delonval(self,val):
@@ -103,9 +110,12 @@ class Orderedlist:
 
 
 s = Orderedlist()
-s.ascending(False)
-s.addonval(Node("5 5"))
-s.addonval(Node("5 4"))
-s.addonval(Node("1 6 8 9 0"))
+s.ascending(True)
+s.addonval(Node(1))
+s.addonval(Node(2))
+s.addonval(Node(4))
+s.addonval(Node(4))
+s.addonval(Node(5))
+s.searchonval(3)
 s.printall()
 print(s.head.value, s.tail.value)
