@@ -147,6 +147,7 @@ class TestMethods(unittest.TestCase):
         self.s.ascending(True)
         self.s.delonval(5)
         self.assertTrue(self.s.tail.value != 5)
+        self.assertTrue(self.s.tail.value == 3)
 
     def tearDown(self):
         self.s.ascending(True)
