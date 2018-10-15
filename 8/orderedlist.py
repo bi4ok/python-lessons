@@ -16,14 +16,22 @@ class Orderedlist:
         self.asc = val
         return
 
-    def sravni(self, item, Node1):
+    def sravni(self, item, node1):
         if self.asc is True:
-            if item.value < Node1.value:
+            x = str(node1.value)
+            x = ''.join(x.split())
+            y = str(item.value)
+            y = ''.join(y.split())
+            if int(y) < int(x):
                 return True
             else:
                 return False
         elif self.asc is False:
-            if item.value > Node1.value:
+            x = str(node1.value)
+            x = ''.join(x.split())
+            y = str(item.value)
+            y = ''.join(y.split())
+            if int(y) > int(x):
                 return True
             else:
                 return False
@@ -95,13 +103,9 @@ class Orderedlist:
 
 
 s = Orderedlist()
-s.ascending(True)
-s.addonval(Node(5))
-s.addonval(Node(5))
-s.addonval(Node(6))
-s.addonval(Node(4))
-s.addonval(Node(99))
-s.addonval(Node(0))
-s.addonval(Node(1))
+s.ascending(False)
+s.addonval(Node("5 5"))
+s.addonval(Node("5 4"))
+s.addonval(Node("1 6 8 9 0"))
 s.printall()
 print(s.head.value, s.tail.value)

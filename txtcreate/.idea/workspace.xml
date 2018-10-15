@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4c70f590-5988-4aad-9fbf-273374227305" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../8/orderedlist.py" beforeDir="false" afterPath="$PROJECT_DIR$/../8/orderedlist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,12 +34,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2536" />
+          <entry key="py" value="2910" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2536" />
+          <entry key="Python" value="2910" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -50,9 +51,9 @@
         <entry file="file://$PROJECT_DIR$/../8/orderedlist.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="388">
-              <caret line="59" column="32" lean-forward="true" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
+              <caret line="111" lean-forward="true" selection-start-line="111" selection-end-line="111" />
               <folding>
-                <marker date="1539598753046" expanded="true" signature="327:626" ph="..." />
+                <marker date="1539600611727" expanded="true" signature="327:878" ph="..." />
               </folding>
             </state>
           </provider>
@@ -237,9 +238,9 @@
     <entry file="file://$PROJECT_DIR$/../8/orderedlist.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="388">
-          <caret line="59" column="32" lean-forward="true" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
+          <caret line="111" lean-forward="true" selection-start-line="111" selection-end-line="111" />
           <folding>
-            <marker date="1539598753046" expanded="true" signature="327:626" ph="..." />
+            <marker date="1539600611727" expanded="true" signature="327:878" ph="..." />
           </folding>
         </state>
       </provider>
