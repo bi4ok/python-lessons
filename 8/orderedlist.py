@@ -16,61 +16,51 @@ class Orderedlist:
         self.asc = val
         return
 
+    def sravni(self, item, Node1):
+        if self.asc is True:
+            if item.value < Node1.value:
+                return True
+            else:
+                return False
+        elif self.asc is False:
+            if item.value > Node1.value:
+                return True
+            else:
+                return False
+
     def addonval(self, item):
-        if self.head is None:
+        if self.head is None:           # Добавление первого элемента, обозначение головы и хвоста
             self.head = item
             self.tail = item
             item.prev = None
             item.next = None
+            return
         Node = self.head
-        if self.asc is True:
-            if item.value < Node.value:
-                self.head = item
+        if self.sravni(item, Node) is True:         # Сравнение с первым элементом,замена head
+            self.head = item
+            Node.prev = item
+            item.next = Node
+            return
+        elif item.value == Node.value:              # Добавление повторяющихся элементов
+            x = Node.next
+            Node.next = item
+            item.next = x
+            item.prev = Node
+            return
+        while Node is not None:
+            if self.sravni(item, Node) is True:     # Добавление элемента между тем который меньше и тем, который больше
+                x = Node.prev
                 Node.prev = item
+                item.prev = x
                 item.next = Node
-            elif item.value == Node.value:
-                x = Node.next
+                item.prev.next = item
+                return
+            elif Node.next is None:                 # Добавление элемента в конец, замена tail
+                self.tail = item
                 Node.next = item
-                item.next = x
                 item.prev = Node
-            while Node is not None:
-                if Node.value < item.value:
-                    if Node.next is None:
-                        self.tail = item
-                        Node.next = item
-                        item.prev = Node
-                    elif Node.next.value >= item.value:
-                        x = Node.next
-                        Node.next = item
-                        item.prev = Node
-                        item.next = x
-                        Node.next.next.prev = item
-                Node = Node.next
-        elif self.asc is False:
-            if item.value > Node.value:
-                self.head = item
-                Node.prev = item
-                item.next = Node
-            elif item.value == Node.value:
-                x = Node.next
-                Node.next = item
-                item.next = x
-                item.prev = Node
-            while Node is not None:
-                if Node.value > item.value:
-                    if Node.next is None:
-                        self.tail = item
-                        Node.next = item
-                        item.prev = Node
-                    elif Node.next.value <= item.value:
-                        x = Node.next
-                        Node.next = item
-                        item.prev = Node
-                        item.next = x
-                        Node.next.next.prev = item
-                Node = Node.next
-        else:
-            print('ascending is not defined')
+                return
+            Node = Node.next
 
     def searchonval(self, val):
         Node = self.head
@@ -105,11 +95,13 @@ class Orderedlist:
 
 
 s = Orderedlist()
-s.ascending(False)
-s.addonval(Node(1))
-s.addonval(Node(1))
-s.addonval(Node(3))
-s.addonval(Node(2))
+s.ascending(True)
+s.addonval(Node(5))
+s.addonval(Node(5))
+s.addonval(Node(6))
 s.addonval(Node(4))
+s.addonval(Node(99))
+s.addonval(Node(0))
+s.addonval(Node(1))
 s.printall()
 print(s.head.value, s.tail.value)
