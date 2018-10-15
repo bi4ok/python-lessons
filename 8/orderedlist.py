@@ -1,3 +1,6 @@
+import unittest
+
+
 class Node:
     def __init__(self, v):
         self.value = v
@@ -85,22 +88,21 @@ class Orderedlist:
         print("Числа нет в списке")
         return None
 
-    def delonval(self,val):
-        Node = self.head
-        while Node != None:
-            if Node.value == val:
-                if Node.prev != None:
-                    Node = Node.prev
-                    Node.next = Node.next.next
-                else:
-                    self.head = Node.next
-                if Node.next != None:
-                    Node = Node.next
-                    Node.prev = Node.prev.prev
-                else:
-                    self.tail = Node
-                break
-            Node = Node.next
+    def delonval(self, val):
+        Node = self.searchonval(val)
+        if Node is None:
+            return None
+        elif Node.value == val:
+            if Node.prev != None:
+                Node = Node.prev
+                Node.next = Node.next.next
+            else:
+                self.head = Node.next
+            if Node.next != None:
+                Node = Node.next
+                Node.prev = Node.prev.prev
+            else:
+                self.tail = Node
 
     def printall(self):
         Node = self.head
@@ -109,13 +111,51 @@ class Orderedlist:
             Node = Node.next
 
 
-s = Orderedlist()
-s.ascending(True)
-s.addonval(Node(1))
-s.addonval(Node(2))
-s.addonval(Node(4))
-s.addonval(Node(4))
-s.addonval(Node(5))
-s.searchonval(3)
-s.printall()
-print(s.head.value, s.tail.value)
+class TestMethods(unittest.TestCase):
+
+    def setUp(self):
+        self.s = Orderedlist()
+        self.s.ascending(True)
+        self.s.addonval(Node(1))
+        self.s.addonval(Node(2))
+        self.s.addonval(Node(3))
+
+    def testaddonval(self):
+        self.s.ascending(True)
+        self.s.addonval(Node(100))
+        self.assertTrue(self.s.tail.value == 100)
+        self.s.delonval(100)
+        self.s.ascending(False)
+        self.s.addonval(Node(100))
+        self.assertTrue(self.s.head.value == 100)
+        self.s.delonval(100)
+
+    def testsearchonval(self):
+        self.s.ascending(True)
+        self.s.addonval(Node(5))
+        self.assertTrue(self.s.searchonval(5).value == 5)
+        self.assertTrue(self.s.searchonval(4) is None)
+        self.s.ascending(False)
+        self.assertTrue(self.s.searchonval(5) is None)
+        self.s.delonval(5)
+
+    def testdelonval(self):
+        self.s.ascending(True)
+        self.s.addonval(Node(5))
+        self.s.ascending(False)
+        self.assertTrue(self.s.delonval(5) is None)
+        self.s.ascending(True)
+        self.s.delonval(5)
+        self.assertTrue(self.s.tail.value != 5)
+
+    def tearDown(self):
+        self.s.ascending(True)
+        self.s.delonval(1)
+        self.s.delonval(2)
+        self.s.delonval(3)
+
+
+if __name__ == '__main__':
+    unittest.main()
+
+
