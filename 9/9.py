@@ -41,9 +41,19 @@ class HashTable:
             return None
 
     def find_value(self, val):
-        for i in range(self.size):
-            if self.slots[i] == str(val):
-                return i
+        index = self.hash_fun(val)
+        for i in range(self.size - 1):
+            if self.slots[index] is None:
+                return None
+            else:
+                if index + self.step <= (self.size - 1):
+                    index += self.step
+                    if self.slots[index] == val:
+                        return index
+                elif index + self.step > self.size - 1:
+                    index = 0 + (index + self.step - self.size)
+                    if self.slots[index] == val:
+                        return index
         return None
 
     def del_all(self):
@@ -103,7 +113,7 @@ class TestMethods(unittest.TestCase):
 
     def test_findvalue(self):
         self.initialize()
-        self.assertTrue(self.s.find_value(17) == 17)
+        self.assertTrue(self.s.find_value("17") == 17)
         self.s.del_all()
 
 
