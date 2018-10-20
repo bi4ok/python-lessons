@@ -43,8 +43,8 @@ class HashTable:
     def find_value(self, val):
         index = self.hash_fun(val)
         for i in range(self.size - 1):
-            if self.slots[index] is None:
-                return None
+            if self.slots[index] == val:
+                return index
             else:
                 if index + self.step <= (self.size - 1):
                     index += self.step
