@@ -107,5 +107,35 @@ class TestMethods(unittest.TestCase):
         self.assertTrue(self.s.get("1") is None)            # Проверка извлечения значения по отсутсвующему кллючу
 
 
-if __name__ == '__main__':
-    unittest.main()
+s = AssociateTable(18, 3)
+x = 2
+print(s.step)
+while s.is_key("1") is None:
+    for i in range(s.size):
+        if i * s.step <= (s.size - 1):
+            if s.slots[i*s.step] is None:
+                s.slots[i * s.step] = "1"
+            else:
+                s.del_all()
+                s.step += 1
+                break
+        elif i * s.step > s.size - 1:
+            z = s.size
+            if i * s.step - z < s.size:
+                if s.slots[i * s.step - z] is None:
+                    s.slots[i * s.step - z] = "1"
+                else:
+                    s.del_all()
+                    s.step += 1
+                    break
+            elif i * s.step - z > s.size:
+                while i * s.step - z > s.size:
+                    z += z
+                if s.slots[i * s.step - z] is None:
+                    s.slots[i * s.step - z] = "1"
+                else:
+                    s.del_all()
+                    s.step += 1
+                    break
+
+print(s.step)
