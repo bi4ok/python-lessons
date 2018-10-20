@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ca664ee0-1d49-42b1-95b0-9e1ed7f2d2e9" name="Default Changelist" comment="" />
+    <list default="true" id="51c910a2-f80b-4dff-bb2e-a8c35a9ca8ae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/10.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../9/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../9/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../9/9.py" beforeDir="false" afterPath="$PROJECT_DIR$/../9/9.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -9,33 +13,33 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FUSProjectUsageTrigger">
-    <session id="-1696685685">
+    <session id="1507266358">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.4" value="2" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="1" />
+          <entry key="py" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="1" />
+          <entry key="Python" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="4713" />
+          <entry key="py" value="1053" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="4713" />
+          <entry key="Python" value="1053" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -43,15 +47,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/9.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../9/9.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="57" selection-start-line="57" selection-end-line="57" />
-              <folding>
-                <marker date="1539973365007" expanded="true" signature="42:47" ph="..." />
-                <marker date="1539973365007" expanded="true" signature="1226:1802" ph="..." />
-              </folding>
+            <state relative-caret-position="1071">
+              <caret line="63" selection-start-line="63" selection-end-line="120" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/10.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="623">
+              <caret line="77" selection-start-line="77" selection-end-line="77" />
             </state>
           </provider>
         </entry>
@@ -71,7 +80,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/9.py" />
+        <option value="$PROJECT_DIR$/../9/9.py" />
+        <option value="$PROJECT_DIR$/10.py" />
       </list>
     </option>
   </component>
@@ -92,14 +102,17 @@
         <subPane>
           <expand>
             <path>
-              <item name="9" type="b2602c69:ProjectViewProjectNode" />
-              <item name="9" type="462c0819:PsiDirectoryNode" />
+              <item name="10" type="b2602c69:ProjectViewProjectNode" />
+              <item name="10" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../9/9.py" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -113,9 +126,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="9" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="9" />
+  <component name="RunManager" selected="Python.10">
+    <configuration name="10" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="10" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -126,7 +139,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/9.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/10.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -135,8 +148,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="9" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="10" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../9" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../9/9.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.10" />
+      <item itemvalue="Python.9" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.10" />
         <item itemvalue="Python.9" />
       </list>
     </recent_temporary>
@@ -146,19 +185,18 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ca664ee0-1d49-42b1-95b0-9e1ed7f2d2e9" name="Default Changelist" comment="" />
-      <created>1539938394370</created>
+      <changelist id="51c910a2-f80b-4dff-bb2e-a8c35a9ca8ae" name="Default Changelist" comment="" />
+      <created>1540000314879</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1539938394370</updated>
+      <updated>1540000314879</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25302014" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -183,14 +221,17 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/9.py">
+    <entry file="file://$PROJECT_DIR$/../9/9.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-          <folding>
-            <marker date="1539973365007" expanded="true" signature="42:47" ph="..." />
-            <marker date="1539973365007" expanded="true" signature="1226:1802" ph="..." />
-          </folding>
+        <state relative-caret-position="1071">
+          <caret line="63" selection-start-line="63" selection-end-line="120" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/10.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="623">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
         </state>
       </provider>
     </entry>
