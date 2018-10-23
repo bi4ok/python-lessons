@@ -18,19 +18,10 @@ class AssociateTable:
         index = index % self.size
         return index
 
-    def seek_slot(self, val):
-        index = self.hash_fun(val)
-        if self.slots[index] is None:
-            return index
-        return None
-
     def put_value(self, key, item):
-        x = self.seek_slot(key)
-        if x is not None:
-            self.slots[x] = key
-            self.values[x] = item
-        else:
-            return None
+        index = self.hash_fun(key)
+        self.slots[index] = key
+        self.values[index] = item
 
     def is_key(self, val):
         index = self.hash_fun(val)
@@ -70,13 +61,13 @@ class TestMethods(unittest.TestCase):
         self.assertTrue(self.s.slots[14] == "123")
         self.assertTrue(self.s.values[14] == "321")
         self.s.put_value("123", "321")                      # Добавление значения по существующему ключу
-        self.assertTrue(self.s.slots[1] == "123")
-        self.assertTrue(self.s.values[1] == "321")
+        self.assertTrue(self.s.slots[14] == "123")
+        self.assertTrue(self.s.values[14] == "321")
         self.s.del_all()
 
     def test_iskey(self):
         self.initialize()
-        self.assertTrue(self.s.is_key("17") == 17)          # Проверка присутствующего ключа
+        self.assertTrue(self.s.is_key("17") == 15)          # Проверка присутствующего ключа
         self.assertTrue(self.s.is_key("20") is None)        # Проверка отсутствующего ключа
         self.s.del_all()
 
@@ -86,5 +77,8 @@ class TestMethods(unittest.TestCase):
         self.s.del_all()
         self.assertTrue(self.s.get("1") is None)            # Проверка извлечения значения по отсутсвующему кллючу
 
+
+if __name__ == '__main__':
+    unittest.main()
 
 
