@@ -20,18 +20,8 @@ class AssociateTable:
 
     def seek_slot(self, val):
         index = self.hash_fun(val)
-        for i in range(self.size - 1):
-            if self.slots[index] is None:
-                return index
-            else:
-                if index + self.step <= (self.size - 1):
-                    index += self.step
-                    if self.slots[index] is None:
-                        return index
-                elif index + self.step > self.size-1:
-                    index = 0 + (index + self.step - self.size)
-                    if self.slots[index] is None:
-                        return index
+        if self.slots[index] is None:
+            return index
         return None
 
     def put_value(self, key, item):
@@ -44,18 +34,8 @@ class AssociateTable:
 
     def is_key(self, val):
         index = self.hash_fun(val)
-        for i in range(self.size - 1):
-            if self.slots[index] == val:
-                return index
-            else:
-                if index + self.step <= (self.size - 1):
-                    index += self.step
-                    if self.slots[index] == val:
-                        return index
-                elif index + self.step > self.size - 1:
-                    index = 0 + (index + self.step - self.size)
-                    if self.slots[index] == val:
-                        return index
+        if self.slots[index] == val:
+            return index
         return None
 
     def del_all(self):
@@ -107,35 +87,4 @@ class TestMethods(unittest.TestCase):
         self.assertTrue(self.s.get("1") is None)            # Проверка извлечения значения по отсутсвующему кллючу
 
 
-s = AssociateTable(18, 3)
-x = 2
-print(s.step)
-while s.is_key("1") is None:
-    for i in range(s.size):
-        if i * s.step <= (s.size - 1):
-            if s.slots[i*s.step] is None:
-                s.slots[i * s.step] = "1"
-            else:
-                s.del_all()
-                s.step += 1
-                break
-        elif i * s.step > s.size - 1:
-            z = s.size
-            if i * s.step - z < s.size:
-                if s.slots[i * s.step - z] is None:
-                    s.slots[i * s.step - z] = "1"
-                else:
-                    s.del_all()
-                    s.step += 1
-                    break
-            elif i * s.step - z > s.size:
-                while i * s.step - z > s.size:
-                    z += z
-                if s.slots[i * s.step - z] is None:
-                    s.slots[i * s.step - z] = "1"
-                else:
-                    s.del_all()
-                    s.step += 1
-                    break
 
-print(s.step)
