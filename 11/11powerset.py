@@ -21,22 +21,28 @@ class PowerSet:
     def seek_slot(self, val):
         index = self.hash_fun(val)
         for i in range(self.size - 1):
-            if self.slots[index] is None:
+            if self.slots[index] == val:
+                return None
+            elif self.slots[index] is None:
                 return index
             else:
                 if index + self.step <= (self.size - 1):
                     index += self.step
-                    if self.slots[index] is None:
+                    if self.slots[index] == val:
+                        return None
+                    elif self.slots[index] is None:
                         return index
                 elif index + self.step > self.size-1:
                     index = 0 + (index + self.step - self.size)
-                    if self.slots[index] is None:
+                    if self.slots[index] == val:
+                        return None
+                    elif self.slots[index] is None:
                         return index
         return None
 
     def put_value(self, val):
         x = self.seek_slot(val)
-        if x is not None and self.find_value(val) is None:
+        if x is not None:
             self.slots[x] = val
         else:
             return None
