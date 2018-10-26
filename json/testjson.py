@@ -12,17 +12,16 @@ user = result[-1]
 print(user["userId"])
 x = powerset.PowerSet(18, 5)
 
-for i in range(200):
+for i in range(len(result)):
     user = result[i]
     x.put_value(user["userId"])
 print(x.len_set())
 
 user = {}
-for i in range(200):
+for i in range(len(result)):
     user[result[i]["userId"]] = {"num": 0, "completed": 0}
 
-for j in range(200):
+for j in range(len(result)):
     user[result[j]["userId"]]["num"] += 1
     if result[j]["completed"] is True:
         user[result[j]["userId"]]["completed"] += 1
-print(user)
