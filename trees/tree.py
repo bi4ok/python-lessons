@@ -62,32 +62,12 @@ class SimpleTree:
         else:
             return None
 
-    def spisokall(self):
-        z = 0
-        node = self.root
-        spisok = []
-        while node.value is not None:
-            if node.flag == 0:
-                spisok.append(node)
-                node.flag = 1
-            if node.leafs[z] is not None:
-                node = node.leafs[z]
-                z = 0
-            elif node.leafs[z] is None:
-                if node.parent is not None:
-                    z = node.parent.leafs.index(node) + 1
-                    node = node.parent
-                else:
-                    break
-        self.flagsall(0)
-        return spisok
-
     def spisokval(self, val):
         z = 0
         node = self.root
         spisok = []
         while node.value is not None:
-            if node.value == val and node.flag == 0:
+            if (val is None or node.value == val) and node.flag == 0:
                 spisok.append(node)
                 node.flag = 1
             if node.leafs[z] is not None:
@@ -182,67 +162,30 @@ class SimpleTree:
         self.flagsall(0)
         return {"узлы": roots, "листья": leafs}
 
-
-class TestMethods(unittest.TestCase):
-
-    def initialize(self):
-        self.s = SimpleTree()
-        self.s.root = Node(0)
-        self.s.add_branch(Node(0), Node(1))
-        self.s.add_branch(Node(0), Node(2))
-        self.s.add_branch(Node(1), Node(3))
-        self.s.add_branch(Node(1), Node(4))
-        self.s.add_branch(Node(2), Node(5))
-        self.s.add_branch(Node(2), Node(6))
-
-    def test_add(self):
-        self.initialize()
-        self.assertTrue(self.s.root.leafs[2] is None)           # Место для листка свободно
-        self.s.add_branch(Node(0), Node(99))
-        self.assertTrue(self.s.root.leafs[2].value == 99)       # Лист появился
-        self.s.delete_leaf(Node(1))
-        self.s.delete_leaf(Node(2))
-        self.s.delete_leaf(Node(99))
-
-    def test_del(self):
-        self.initialize()
-        self.assertTrue(self.s.root.leafs[1] is not None)           # Проверка наличия ветви
-        self.s.delete_leaf(Node(2))
-        self.assertTrue(self.s.root.leafs[1] is None)               # Проверка отсутствия ветви
-        self.s.delete_leaf(Node(1))
-
-    def test_spisokall(self):
-        self.initialize()
-        self.assertTrue(len(self.s.spisokall()) == 7)
-        self.s.delete_leaf(Node(1))
-        self.s.delete_leaf(Node(2))
-
-    def test_spisokval(self):
-        self.initialize()
-        self.s.add_branch(Node(1), Node(99))
-        self.s.add_branch(Node(1), Node(99))
-        self.s.add_branch(Node(1), Node(99))
-        self.assertTrue(len(self.s.spisokval(99)) == 3)
-        self.s.delete_leaf(Node(1))
-        self.s.delete_leaf(Node(2))
-
-    def test_perenos(self):
-        self.initialize()
-        self.assertTrue(self.s.root.leafs[0].leafs[0].value == 3)           # слот занят элментом 3
-        self.assertTrue(self.s.root.leafs[1].leafs[0].leafs[0] is None)     # слот после элемента 5 свободен
-        self.s.perenos(Node(3), Node(5))
-        self.assertTrue(self.s.root.leafs[0].leafs[0].value != 3)           # слот с элементом 3 удален
-        self.assertTrue(self.s.root.leafs[1].leafs[0].leafs[0].value == 3)  # слот после элемента 5 занят слотом с эл. 3
-        self.s.delete_leaf(Node(1))
-        self.s.delete_leaf(Node(2))
-
-    def test_schet(self):
-        self.initialize()
-        self.assertTrue(self.s.schet()["узлы"] == 3)
-        self.assertTrue(self.s.schet()["листья"] == 4)
-        self.s.delete_leaf(Node(1))
-        self.s.delete_leaf(Node(2))
+    def poisk(self, x, val, z=0):
+        node = x
+        node.flag = 1
+        if node.value == val.value:
+            return node
+        elif len(node.leafs) <= z:
+            z = 0
+            return self.poisk(x, val, z)
+        elif node.leafs[z] is not None and node.leafs[z].flag == 0:
+            return self.poisk(x.leafs[z], val, z)
+        elif node.leafs[z] is None:
+            z = 0
+            return self.poisk(x.parent, val, z)
+        elif node.leafs[z].flag == 1:
+            z += 1
+            return self.poisk(x, val, z)
 
 
-if __name__ == '__main__':
-    unittest.main()
+s1 = SimpleTree()
+s1.root = Node(0)
+s1.add_branch(Node(0), Node(1))
+s1.add_branch(Node(0), Node(2))
+s1.add_branch(Node(1), Node(3))
+s1.add_branch(Node(1), Node(4))
+s1.add_branch(Node(2), Node(5))
+s1.add_branch(Node(2), Node(6))
+print(s1.poisk(s1.root, Node(6)).value)
