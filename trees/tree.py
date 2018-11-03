@@ -5,7 +5,7 @@ class Node:
     def __init__(self, val):
         self.value = val
         self.parent = None
-        self.leafs = [None]
+        self.leafs = []
         self.flag = 0
         self.level = 0
 
@@ -18,11 +18,7 @@ class SimpleTree:
     def add_branch(self, val, it2):
         node = self.poisk(self.root, val)
         if node.value == val.value:
-            if node.leafs[0] is None:
-                node.leafs = [it2]
-                node.leafs.append(None)
-            else:
-                node.leafs.insert(-1, it2)
+            node.leafs.append(it2)
             x = node
             node = it2
             node.parent = x
@@ -36,7 +32,7 @@ class SimpleTree:
             node.parent.leafs.remove(node)
             node.value = None
             node.parent = None
-            node.leafs = [None]
+            node.leafs = []
         else:
             return None
 
@@ -48,10 +44,10 @@ class SimpleTree:
             if (val is None or node.value == val) and node.flag == 0:
                 spisok.append(node)
                 node.flag = 1
-            if node.leafs[z] is not None:
+            if z < len(node.leafs) and node.leafs[z] is not None:
                 node = node.leafs[z]
                 z = 0
-            elif node.leafs[z] is None:
+            elif z >= len(node.leafs):
                 if node.parent is not None:
                     z = node.parent.leafs.index(node) + 1
                     node = node.parent
@@ -65,10 +61,10 @@ class SimpleTree:
         node = self.root
         while node.value is not None:
             node.flag = val
-            if node.leafs[z] is not None:
+            if z < len(node.leafs) and node.leafs[z] is not None:
                 node = node.leafs[z]
                 z = 0
-            elif node.leafs[z] is None:
+            elif z >= len(node.leafs):
                 if node.parent is not None:
                     z = node.parent.leafs.index(node) + 1
                     node = node.parent
@@ -99,16 +95,16 @@ class SimpleTree:
         roots = 0
         leafs = 0
         while node.value is not None:
-            if node.leafs[0] is None and node.flag == 0:
+            if len(node.leafs) == 0 and node.flag == 0:
                 leafs += 1
                 node.flag = 1
             elif node.leafs[0] is not None and node.flag == 0:
                 roots += 1
                 node.flag = 1
-            if node.leafs[z] is not None:
+            if z < len(node.leafs)and node.leafs[z] is not None:
                 node = node.leafs[z]
                 z = 0
-            elif node.leafs[z] is None:
+            elif z >= len(node.leafs):
                 if node.parent is not None:
                     z = node.parent.leafs.index(node) + 1
                     node = node.parent
@@ -121,8 +117,10 @@ class SimpleTree:
         node = x
         if node.value == val.value:
             return node
-        for i in node.leafs[0:-1]:
+        for i in node.leafs:
             x = self.poisk(i, val)
+            if x is None:
+                break
             if x.value == val.value:
                 return x
         return x
@@ -142,7 +140,7 @@ class TestMethods(unittest.TestCase):
 
     def test_add(self):
         self.initialize()
-        self.assertTrue(self.s.root.leafs[2] is None)           # Место для листка свободно
+        self.assertTrue(len(self.s.root.leafs) == 2)           # Место для листка свободно
         self.s.add_branch(Node(0), Node(99))
         self.assertTrue(self.s.root.leafs[2].value == 99)       # Лист появился
         self.s.delete_leaf(Node(1))
@@ -153,7 +151,7 @@ class TestMethods(unittest.TestCase):
         self.initialize()
         self.assertTrue(self.s.root.leafs[1] is not None)           # Проверка наличия ветви
         self.s.delete_leaf(Node(2))
-        self.assertTrue(self.s.root.leafs[1] is None)               # Проверка отсутствия ветви
+        self.assertTrue(len(self.s.root.leafs) == 1)               # Проверка отсутствия ветви
         self.s.delete_leaf(Node(1))
 
     def test_spisokall(self):
@@ -174,7 +172,7 @@ class TestMethods(unittest.TestCase):
     def test_perenos(self):
         self.initialize()
         self.assertTrue(self.s.root.leafs[0].leafs[0].value == 3)           # слот занят элментом 3
-        self.assertTrue(self.s.root.leafs[1].leafs[0].leafs[0] is None)     # слот после элемента 5 свободен
+        self.assertTrue(len(self.s.root.leafs[1].leafs[0].leafs) == 0)     # слот после элемента 5 свободен
         self.s.perenos(Node(3), Node(5))
         self.assertTrue(self.s.root.leafs[0].leafs[0].value != 3)           # слот с элементом 3 удален
         self.assertTrue(self.s.root.leafs[1].leafs[0].leafs[0].value == 3)  # слот после элемента 5 занят слотом с эл. 3
