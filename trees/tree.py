@@ -115,15 +115,15 @@ class SimpleTree:
 
     def poisk(self, x, val):
         node = x
-        if node.value == val.value:
+        if node is not None and node.value == val.value:
             return node
         for i in node.leafs:
-            x = self.poisk(i, val)
-            if x is None:
+            if i is None:
                 break
-            if x.value == val.value:
+            x = self.poisk(i, val)
+            if x is not None and x.value == val.value:
                 return x
-        return x
+        return None
 
 
 class TestMethods(unittest.TestCase):
