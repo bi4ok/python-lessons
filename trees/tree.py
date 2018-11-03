@@ -117,22 +117,12 @@ class SimpleTree:
         self.flagsall(0)
         return {"узлы": roots, "листья": leafs}
 
-    def poisk2(self, x, val):
-        node = x
-        if node.value == val.value:
-            return node
-        for i in node.leafs[0:-1]:
-            if i.value == val.value:
-                return i
-            x = self.poisk(i, val)
-        return x
-
     def poisk(self, x, val):
         node = x
         if node.value == val.value:
             return node
         for i in node.leafs[0:-1]:
-            x = self.poisk2(i, val)
+            x = self.poisk(i, val)
             if x.value == val.value:
                 return x
         return x
