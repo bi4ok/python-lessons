@@ -2,8 +2,8 @@ import xml.etree.ElementTree as ETree
 import unittest
 
 
-xml1 = ETree.parse("demo.xml")
-root = xml1.getroot()
+xml12 = ETree.parse("demo.xml")
+root1 = xml1.getroot()
 
 
 print(len(root))
