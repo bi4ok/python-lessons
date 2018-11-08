@@ -147,6 +147,26 @@ def slowtree(s1):
     return tree
 
 
+def glubina(root):
+    if root is None:
+        return 0
+    return max(glubina(root.l), glubina(root.r)) + 1
+
+
+def balans(root):
+    if root is None:
+        return True
+    lh = glubina(root.l)
+    rh = glubina(root.r)
+    if root.l is not None:
+        print(root.l.value, "|||", lh, "l")
+    if root.r is not None:
+        print(root.r.value, "|||", rh, "r")
+    if (abs(lh - rh) <= 1) and balans(root.l) is True and balans(root.r) is True:
+        return True
+    return False
+
+
 print(timeit.Timer(lambda: fasttree(s1)).timeit(number=100))
 print(timeit.Timer(lambda: slowtree(s1)).timeit(number=100))
 print("___________________________________________________")
@@ -156,12 +176,12 @@ class TestMethods(unittest.TestCase):
 
     def initialize(self):
         self.st1 = []
-        for i in range(20):
+        for i in range(10):
             self.st1.append(i)
         self.st2 = []
-        for j in range(20):
+        for j in range(10):
             self.st2.append(arraytree.Node(self.st1[j]))
-        levels = 6
+        levels = 3
         size = (2 ** (levels + 1)) - 1
         self.st3 = masiv(self.st2, size)
         self.st4 = mastobst(self.st3[0])
@@ -178,25 +198,10 @@ class TestMethods(unittest.TestCase):
             self.assertTrue(root.r.level - root.level == 1)
             self.proverka(root.r)
 
-    def proverkaglubin(self, root, ll, lr):
-        if not root:
-            return
-        if root.l is not None:
-            if root.l.level > ll:
-                ll = root.l.level
-            self.proverkaglubin(root.l, ll, lr)
-            return
-        if root.r is not None:
-            if root.r.level > lr:
-                lr = root.r.level
-            self.proverkaglubin(root.r, ll, lr)
-            return
-        self.assertTrue(abs(ll - lr) <= 1)
-
     def testdrevo(self):
         self.initialize()
         self.proverka(self.st4)
-        self.proverkaglubin(self.st4, 0, 0)
+        self.assertTrue(balans(self.st4))
 
 
 if __name__ == '__main__':
