@@ -1,5 +1,7 @@
 import arraytree
 import random
+import timeit
+import unittest
 
 
 def masiv(spisok, sz):
@@ -82,13 +84,13 @@ def povtor(spisok, mtree, parent):
 
 
 s1 = []
-for j in range(10000):
+for j in range(10):
     s1.append(j)
 
 s1 = sorted(s1)
 s2 = []
 
-for k in range(10000):
+for k in range(10):
     s2.append(arraytree.Node(s1[k]))
 
 levels = 15
@@ -97,8 +99,105 @@ size = (2**(levels + 1)) - 1
 s = masiv(s2, size)
 print("_____")
 z = 0
-for m in range(len(s)):
-    if s[m] is not None:
-        print(s[m].value, m, s[m].level)
-        z += 1
-print(z)
+#for m in range(len(s)):
+ #   if s[m] is not None:
+  #      print(s[m].value, m, s[m].level)
+   #     z += 1
+#print(z)
+
+
+def mastobst(mas):
+    if not mas:
+        return
+    root = mas
+    root.l = mastobst(mas.l)
+    root.r = mastobst(mas.r)
+    return root
+
+
+def printallfast(tree):
+    if not tree:
+        return
+    print(tree.value, tree.level)
+    printallfast(tree.l)
+    printallfast(tree.r)
+
+
+s1 = []
+for j in range(20):
+    s1.append(random.randint(0, 25))
+
+
+def fasttree(s1):
+    s1 = sorted(s1)
+    s2 = []
+    for k in range(20):
+        s2.append(arraytree.Node(s1[k]))
+    levels = 10
+    size = (2 ** (levels + 1)) - 1
+    s = masiv(s2, size)
+    sd = mastobst(s[0])
+    return sd
+
+
+def slowtree(s1):
+    tree = arraytree.ArrayTree(size)
+    for i in range(len(s1)):
+        tree.add_branch(arraytree.Node(s1[i]))
+    return tree
+
+
+print(timeit.Timer(lambda: fasttree(s1)).timeit(number=100))
+print(timeit.Timer(lambda: slowtree(s1)).timeit(number=100))
+print("___________________________________________________")
+
+
+class TestMethods(unittest.TestCase):
+
+    def initialize(self):
+        self.st1 = []
+        for i in range(20):
+            self.st1.append(i)
+        self.st2 = []
+        for j in range(20):
+            self.st2.append(arraytree.Node(self.st1[j]))
+        levels = 6
+        size = (2 ** (levels + 1)) - 1
+        self.st3 = masiv(self.st2, size)
+        self.st4 = mastobst(self.st3[0])
+
+    def proverka(self, root):
+        if not root:
+            return
+        if root.l is not None and root.value > root.l.value:
+            self.assertTrue(root.value > root.l.value)
+            self.assertTrue(root.l.level - root.level == 1)
+            self.proverka(root.l)
+        if root.r is not None and root.value < root.r.value:
+            self.assertTrue(root.value < root.r.value)
+            self.assertTrue(root.r.level - root.level == 1)
+            self.proverka(root.r)
+
+    def proverkaglubin(self, root, ll, lr):
+        if not root:
+            return
+        if root.l is not None:
+            if root.l.level > ll:
+                ll = root.l.level
+            self.proverkaglubin(root.l, ll, lr)
+            return
+        if root.r is not None:
+            if root.r.level > lr:
+                lr = root.r.level
+            self.proverkaglubin(root.r, ll, lr)
+            return
+        self.assertTrue(abs(ll - lr) <= 1)
+
+    def testdrevo(self):
+        self.initialize()
+        self.proverka(self.st4)
+        self.proverkaglubin(self.st4, 0, 0)
+
+
+if __name__ == '__main__':
+    unittest.main()
