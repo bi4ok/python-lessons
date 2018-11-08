@@ -1,16 +1,6 @@
 import arraytree
 import random
 
-spisok = []
-for i in range(10):
-    spisok.append(random.randint(0,3))
-
-spisok = sorted(spisok)
-spisok2 = []
-
-for i in range(10):
-    spisok2.append(arraytree.Node(spisok[i]))
-
 
 def masiv(spisok, sz):
     mtree = [None]*sz
@@ -22,14 +12,15 @@ def masiv(spisok, sz):
     mtree.insert(2 * (mtree.index(mtree[0])) + 2, spisok2.pop(l // 2))
     node = mtree[0]
     node.l = mtree[2 * (mtree.index(mtree[0])) + 1]
+    node.l.level = node.level + 1
     node.r = mtree[2 * (mtree.index(mtree[0])) + 2]
+    node.r.level = node.level + 1
     povtor(spisok1, mtree, node.l)
     povtor(spisok2, mtree, node.r)
     return mtree
 
 
 def povtor(spisok, mtree, parent):
-    print("na4alo,spisok = ",len(spisok),"koren", parent.value)
     l = (len(spisok) // 2)
     x1, x2 = None, None
     if len(spisok) == 1:
@@ -56,24 +47,11 @@ def povtor(spisok, mtree, parent):
                     x2 = None
         else:
             x2 = None
-    print()
-    print("выбраны иксы", end=" ")
-    if x1 is not None:
-        print("x1", x1.value, end=" ")
-    else:
-        print("x1", x1, end=" ")
-    if x2 is not None:
-        print("x2", x2.value, end=" ")
-    else:
-        print("x2", x2, end=" ")
-    print()
-    print()
 
     if mtree[2 * (mtree.index(parent)) + 1] is None and x1 is not None:
-        print("mesto", [2 * (mtree.index(parent)) + 1], "svobodbo")
         mtree[2 * (mtree.index(parent)) + 1] = x1
         parent.l = mtree[2 * (mtree.index(parent)) + 1]
-        print("mesto", [2 * (mtree.index(parent)) + 1], "zan9to", x1.value, "vlevo k koren", parent.value)
+        parent.l.level = parent.level + 1
         spisok.remove(x1)
         if len(spisok1) > 0:
             povtor(spisok1, mtree, parent.l)
@@ -84,10 +62,9 @@ def povtor(spisok, mtree, parent):
         povtor(spisok1, mtree, mtree[2 * (mtree.index(parent)) + 1])
 
     if mtree[2 * (mtree.index(parent)) + 2] is None and x2 is not None:
-        print("mesto", [2 * (mtree.index(parent)) + 2], "svobodbo")
         mtree[2 * (mtree.index(parent)) + 2] = x2
         parent.r = mtree[2 * (mtree.index(parent)) + 2]
-        print("mesto", [2 * (mtree.index(parent)) + 2], "zan9to", x2.value, "vpravo k koren", parent.value)
+        parent.r.level = parent.level + 1
         spisok.remove(x2)
         if len(spisok2) > 0:
             povtor(spisok2, mtree, parent.r)
@@ -96,10 +73,7 @@ def povtor(spisok, mtree, parent):
     elif mtree[2 * (mtree.index(parent)) + 2] is not None and x2 is not None:
         spisok2.insert(len(spisok2)//2, x2)
         povtor(spisok2, mtree, mtree[2 * (mtree.index(parent)) + 2])
-
-    print("konec", len(spisok), parent.value)
     return None
-
 
 
 def vderevo(items):
@@ -120,11 +94,11 @@ def vderevo(items):
 
     for i in range(l):                                  # Каждый элемент каждой части из середины добавляется в дерево
         tree.add_branch(items1[len(items1)//2])         # Проверяется размер, доподлняется новыми ячейчками,если нужно
-        #razmer(tree, items1[len(items1)//2])            # Элемент удаляется из списка
+        razmer(tree, items1[len(items1)//2])            # Элемент удаляется из списка
         items1.pop(len(items1)//2)
     for i in range(l):
         tree.add_branch(items2[len(items2)//2])
-        #razmer(tree, items2[len(items2) // 2])
+        razmer(tree, items2[len(items2) // 2])
         items2.pop(len(items2)//2)
 
     if ostatok != 0:                                    # Остаток, при наличии, добавляется в дерево
@@ -145,12 +119,24 @@ def razmer(tree, item):
     return tree
 
 
-s = masiv(spisok2, 30000)
+s1 = []
+for j in range(100):
+    s1.append(random.randint(0, 100))
+
+s1 = sorted(s1)
+s2 = []
+
+for k in range(100):
+    s2.append(arraytree.Node(s1[k]))
+
+levels = 7
+size = (2**(levels + 1)) - 1
+
+s = masiv(s2, size)
 print("_____")
 z = 0
-for i in range(len(s)):
-    if s[i] is not None:
-        print(s[i].value, i)
+for m in range(len(s)):
+    if s[m] is not None:
+        print(s[m].value, m, s[m].level)
         z += 1
 print(z)
-#rint(s[0].r.l.l.value)
