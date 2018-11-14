@@ -10,8 +10,10 @@ class SimpleGraph:
 
     def __init__(self, mv):
         self.max_vertex = mv
+        self.m_adjency = []
+        for i in range(self.max_vertex):
+            self.m_adjency.append([0]*self.max_vertex)
         self.vertex = [None]*self.max_vertex
-        self.m_adjency = [[0]*self.max_vertex, [0]*self.max_vertex, [0]*self.max_vertex, [0]*self.max_vertex, [0]*self.max_vertex]
 
     def add_vert(self, item):
         if self.vertex[-1] is None:
@@ -22,7 +24,7 @@ class SimpleGraph:
             return None
 
     def add_edge(self, item1, item2):
-        if self.m_adjency[self.vertex.index(item1)][self.vertex.index(item2)] == 0:
+        if item1 and item2 is not None:
             self.m_adjency[self.vertex.index(item1)][self.vertex.index(item2)] = 1
             self.m_adjency[self.vertex.index(item2)][self.vertex.index(item1)] = 1
         else:
