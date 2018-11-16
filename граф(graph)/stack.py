@@ -48,9 +48,8 @@ class Stack:
                 print("Sum = ", s2.pop())
             else:
                 s2.push(int(s1.pop()))
-        
-            
-stack = Stack()
-stack.push(1)
-stack.push(2)
-print(stack.pop())
+
+    def clear_stack(self):
+        while len(self.stack) > 0:
+            self.pop()
+
