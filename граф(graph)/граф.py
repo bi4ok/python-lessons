@@ -1,5 +1,6 @@
 import unittest
 import stack
+import modstack
 
 
 class Vertex:
@@ -50,8 +51,7 @@ class SimpleGraph:
     def poiskputi(self, item1, item2):
         s1 = stack.Stack()
         s1.clear_stack()
-        for i in self.vertex:
-            i.hit = False
+        self.clearing()
         curver = item1
         sver = item2
         curver.hit = True
@@ -80,6 +80,53 @@ class SimpleGraph:
                         return s1
         return None
 
+    def clearing(self):
+        for i in self.vertex:
+            i.hit = False
+
+    def poiskputi2(self, item1, item2):
+        s1 = modstack.Stack()
+        s2 = []
+        s1.clear_stack()
+        self.clearing()
+        curver = item1
+        sver = item2
+        curver.hit = True
+        if curver == sver:
+            return curver
+        s1 = self.rekpoisk2(curver, sver, s1, s2)
+        return s1
+
+    def rekpoisk2(self, item1, item2, st, st2):
+        s1 = st
+        s2 = st2
+        itog = []
+        curver = item1
+        for i in self.vertex:
+            if self.check_edge(curver, i) is True and i.hit is False:
+                i.hit = True
+                s1.push(i)
+                z = [curver, i]
+                s2.append(z)
+                if i == item2:
+                    self.filter(s2, i, itog)
+                    return itog
+        x = s1.pop()
+        if x is not None:
+            return self.rekpoisk2(x, item2, s1, s2)
+        return None
+
+    def filter(self, spisok, item, sf):
+        for j in spisok:
+            if item == j[1]:
+                if j[1] not in sf:
+                    sf.insert(0, j[1])
+                if j[0] not in sf:
+                    sf.insert(0, j[0])
+                spisok.remove(j)
+                self.filter(spisok, j[0], sf)
+        return sf
+
 
 class TestMethods(unittest.TestCase):
 
@@ -104,9 +151,10 @@ class TestMethods(unittest.TestCase):
         self.s.add_edge(self.s.vertex[1], self.s.vertex[7])
 
     def test_poisk(self):
-        self.initialize()                                   # Кратчайший путь 0-1-7. Алгоритм выбрал 0-1-3-5-6-7
+        self.initialize()                                   # Кратчайший путь 0-1-7. Алгоритм 1 выбрал 0-1-3-5-6-7
         self.assertTrue(self.s.poiskputi(self.s.vertex[0], self.s.vertex[7]).size() == 6)
-        self.s = None
+        self.assertTrue(len(self.s.poiskputi2(self.s.vertex[0], self.s.vertex[7])) == 3)
+        self.s = None                                       # Алгоритм 2 выбрал 0-1-7 и длина пути равна 3
 
 
 if __name__ == '__main__':
