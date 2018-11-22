@@ -45,10 +45,15 @@ class LinkedList:
         node = self.head
         while node is not None:
             if node == self.head and node.value == val:
-                self.head = self.head.next
+                if self.head == self.tail:
+                    self.tail = None
+                self.head = node.next
                 if all is False:
                     break
             elif node.next == self.tail and node.next.value == val:
+                if self.tail == self.head:
+                    self.head = None
+                    self.tail = None
                 self.tail = node
                 self.tail.next = None
                 break
@@ -56,9 +61,13 @@ class LinkedList:
                 node.next = node.next.next
                 if all is False:
                     break
+
             if node.next is None:
                 break
-            elif node.next.value != val:
+            elif node.next.value == val:
+                if node.next == self.head:
+                    node = node.next
+            else:
                 node = node.next
 
     def clean(self):
