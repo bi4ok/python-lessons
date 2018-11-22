@@ -1,7 +1,3 @@
-import unittest
-import random
-
-
 class Node:
 
     def __init__(self, v):
@@ -102,68 +98,3 @@ def sum_slists(slist1, slist2, slist3):
         return slist3
     else:
         return None
-
-
-class TestMethods(unittest.TestCase):
-
-    def initialize(self):
-        self.s_list3 = LinkedList()
-        self.s_list = LinkedList()
-        self.s_list.add_in_tail(Node(1))
-        self.s_list.add_in_tail(Node(2))
-        self.s_list.add_in_tail(Node(2))
-        self.s_list.add_in_tail(Node(2))
-        self.s_list.add_in_tail(Node(3))
-        self.s_list2 = LinkedList()
-        self.s_list2.add_in_tail(Node(1))
-        self.s_list2.add_in_tail(Node(2))
-        self.s_list2.add_in_tail(Node(2))
-        self.s_list2.add_in_tail(Node(2))
-        self.s_list2.add_in_tail(Node(3))
-
-    def test_delete(self):
-        self.initialize()
-        self.s_list2.delete(3)
-        node = self.s_list2.head
-        while node is not None:
-            self.assertNotEqual(3, node.value)
-            node = node.next
-        self.s_list2 = None
-
-    def test_del_all(self):
-        self.initialize()
-        self.s_list2.delete(2, True)
-        node = self.s_list2.head
-        while node is not None:
-            self.assertNotEqual(2, node.value)
-            node = node.next
-        self.s_list2 = None
-
-    def test_poisk(self):
-        self.initialize()
-        s = self.s_list2.findall(1)
-        self.assertTrue((len(s) == 1) and s[0] == 1)
-        self.s_list2 = None
-
-    def test_len(self):
-        self.initialize()
-        self.assertTrue(self.s_list2.len() == 5)
-        self.s_list2 = None
-
-    def test_insert(self):
-        self.initialize()
-        self.s_list2.insert(3, Node(5))
-        self.assertTrue(self.s_list2.tail.value == 5)
-        self.s_list2 = None
-
-    def test_sumslist(self):
-        self.initialize()
-        self.slist3 = sum_slists(self.s_list, self.s_list2, self.s_list3)
-        self.assertTrue(self.slist3.tail.value == 6)
-        self.s_list2 = None
-        self.s_list3 = None
-        self.s_list = None
-
-
-if __name__ == '__main__':
-    unittest.main()
