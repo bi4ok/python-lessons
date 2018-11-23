@@ -84,6 +84,8 @@ class LinkedList:
 
     def insert(self, afterNode, newNode):
         node = self.head
+        if afterNode is None and self.head is None:
+            self.add_in_tail(newNode)
         while node is not None:
             if node.value == afterNode.value:
                 s = node.next
@@ -94,6 +96,7 @@ class LinkedList:
                     self.tail.next = None
                 break
             node = node.next
+        return None
 
 
 def sum_slists(slist1, slist2, slist3):
@@ -107,3 +110,4 @@ def sum_slists(slist1, slist2, slist3):
         return slist3
     else:
         return None
+
