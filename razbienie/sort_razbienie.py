@@ -2,7 +2,7 @@ import random
 
 s1 = []
 for i in range(30):
-    s1.append(random.randint(0,25))
+    s1.append(random.randint(0, 25))
 #for j in range(10):
  #   s1.append(10)
 print(s1)
@@ -27,6 +27,7 @@ def sort_razbienie(s, N):
             rek += 1
         if i2 - i1 < 1:
             break
+    print(i1, i2)
     if rek == 0:
         sort_razbienie(s, sum(s)//len(s))
 
