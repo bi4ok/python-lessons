@@ -37,7 +37,7 @@ class DynArray:
             if self.count == self.capacity:
                 self.resize(2*self.capacity)
             self.count += 1
-            new_array = self.make_array(self.count)
+            new_array = self.make_array(self.capacity)
             for j in range(self.count):
                 if j == i:
                     new_array[j] = itm
@@ -53,7 +53,7 @@ class DynArray:
         if 0 <= i < self.count:
             if int(self.capacity//1.5) > 16 and self.count-1 <= int(self.capacity//1.5):
                 self.resize(int(self.capacity//1.5))
-            new_array = self.make_array(self.count)
+            new_array = self.make_array(self.capacity)
             for j in range(self.count-1):
                 if j < i:
                     new_array[j] = self.array[j]
