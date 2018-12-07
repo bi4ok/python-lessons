@@ -53,11 +53,11 @@ def sort_razbienie(s, left, right):
 
 
 s = []
-for i in range(50000):
+for i in range(10000):
    s.append(random.randint(0,100))
 s1 = s
 s1 = sorted(s1)
 sort_razbienie(s, 0, len(s)-1)
 print(s == s1)
 print(timeit.Timer(lambda: sort_razbienie(s, 0, len(s)-1)).timeit(number=1))
-print(timeit.Timer(lambda: sort_shella(s)).timeit(number=1))
+print(timeit.Timer(lambda: sorted(s)).timeit(number=1))
