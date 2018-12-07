@@ -7,6 +7,7 @@ class DynArray:
         self.count = 0
         self.capacity = 16
         self.array = self.make_array(self.capacity)
+        self.occupancy = 0.8
 
     def __len__(self):
         return self.count
@@ -55,7 +56,7 @@ class DynArray:
                 if j >= i:
                     self.array[j] = self.array[j+1]
             self.count -= 1
-            if int(self.capacity/1.5) >= 16 and self.count <= int(self.capacity/1.5):
+            if int(self.capacity/1.5) >= 16 and self.count < int(self.capacity*self.occupancy):
                 self.resize(int(self.capacity/1.5))
         else:
             raise IndexError('Index is out of bounds')
