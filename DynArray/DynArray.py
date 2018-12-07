@@ -59,6 +59,7 @@ class DynArray:
             if self.count < int(self.capacity*self.occupancy):
                 if self.capacity*self.occupancy < 16:
                     self.resize(16)
-                self.resize(int(self.capacity/1.5))
+                else:
+                    self.resize(int(self.capacity/1.5))
         else:
             raise IndexError('Index is out of bounds')
