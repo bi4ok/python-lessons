@@ -63,3 +63,12 @@ class DynArray:
                     self.resize(int(self.capacity/1.5))
         else:
             raise IndexError('Index is out of bounds')
+
+
+s1 = DynArray()
+for i in range(1070):
+    s1.append(i)
+for j in range(1070):
+    s1.delete(0)
+    print(s1.capacity, s1.count)
+print()
