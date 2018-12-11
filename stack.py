@@ -6,16 +6,18 @@ class Stack:
         return len(self.stack)
 
     def pop(self):
-        if self.size == 0:
-            return None
+        if self.size() < 1:
+            raise IndexError('Index is out of bounds')
         return self.stack.pop(0)
 
     def push(self, value):
+        if self.size() < 1:
+            raise IndexError('Index is out of bounds')
         return self.stack.insert(0, value)
                                   
     def peak(self):
-        if len(self.stack) == 0:
-            return None
+        if self.size() < 1:
+            raise IndexError('Index is out of bounds')
         return self.stack[0]
 
     def balans(self, s1):
@@ -48,4 +50,3 @@ class Stack:
                 print("Sum = ", s2.pop())
             else:
                 s2.push(int(s1.pop()))
-
