@@ -13,7 +13,7 @@ class Stack:
     def push(self, value):
         return self.stack.insert(0, value)
                                   
-    def peak(self):
+    def peek(self):
         if self.size() < 1:
             return None
         return self.stack[0]
