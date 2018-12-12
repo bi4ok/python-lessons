@@ -7,17 +7,15 @@ class Stack:
 
     def pop(self):
         if self.size() < 1:
-            raise IndexError('Index is out of bounds')
+            return None
         return self.stack.pop(0)
 
     def push(self, value):
-        if self.size() < 1:
-            raise IndexError('Index is out of bounds')
         return self.stack.insert(0, value)
                                   
     def peak(self):
         if self.size() < 1:
-            raise IndexError('Index is out of bounds')
+            return None
         return self.stack[0]
 
     def balans(self, s1):
