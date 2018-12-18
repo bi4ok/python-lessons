@@ -20,83 +20,84 @@ class OrderedList:
             return 1
 
     def add(self, value):
+        value = Node(value)
         if self.head is None:           # Добавление первого элемента, обозначение головы и хвоста
             self.head = value
             self.tail = value
             value.prev = None
             value.next = None
             return
-        Node = self.head
+        node = self.head
         if self.__ascending is True:
-            if self.compare(value, Node) == -1:         # Сравнение с первым элементом,замена head
+            if self.compare(value, node) == -1:         # Сравнение с первым элементом,замена head
                 self.head = value
-                Node.prev = value
-                value.next = Node
+                node.prev = value
+                value.next = node
                 return
         elif self.__ascending is False:
-            if self.compare(value, Node) == 1:         # Сравнение с первым элементом,замена head
+            if self.compare(value, node) == 1:         # Сравнение с первым элементом,замена head
                 self.head = value
-                Node.prev = value
-                value.next = Node
+                node.prev = value
+                value.next = node
                 return
-        elif value.value == Node.value:              # Добавление повторяющихся элементов
-            x = Node.next
-            Node.next = value
+        elif value.value == node.value:              # Добавление повторяющихся элементов
+            x = node.next
+            node.next = value
             value.next = x
-            value.prev = Node
+            value.prev = node
             return
-        while Node is not None:
+        while node is not None:
             if self.__ascending is True:
-                if self.compare(value, Node) == -1:     # Добавление элемента между тем который меньше и тем, который больше
-                    x = Node.prev
-                    Node.prev = value
+                if self.compare(value, node) == -1:     # Добавление элемента между тем который меньше и тем, который больше
+                    x = node.prev
+                    node.prev = value
                     value.prev = x
-                    value.next = Node
+                    value.next = node
                     value.prev.next = value
                     return
             elif self.__ascending is False:
-                if self.compare(value, Node) == 1:     # Добавление элемента между тем который меньше и тем, который больше
-                    x = Node.prev
-                    Node.prev = value
+                if self.compare(value, node) == 1:     # Добавление элемента между тем который меньше и тем, который больше
+                    x = node.prev
+                    node.prev = value
                     value.prev = x
-                    value.next = Node
+                    value.next = node
                     value.prev.next = value
                     return
-            if Node.next is None:                 # Добавление элемента в конец, замена tail
+            if node.next is None:                 # Добавление элемента в конец, замена tail
                 self.tail = value
-                Node.next = value
-                value.prev = Node
+                node.next = value
+                value.prev = node
                 return
-            Node = Node.next
+            node = node.next
         pass
 
     def find(self, val):
-        Node = self.head
-        while Node is not None:
-            if Node.value == val:
-                return Node
-            elif self.__ascending is True and Node.value > val:
+        node = self.head
+        while node is not None:
+            if node.value == val:
+                return node
+            elif self.__ascending is True and node.value > val:
                 return None
-            elif self.__ascending is False and Node.value < val:
+            elif self.__ascending is False and node.value < val:
                 return None
-            Node = Node.next
+            node = node.next
         return None
 
     def delete(self, val):
-        Node = self.find(val)
-        if Node is None:
+        node = self.find(val)
+        if node is None:
             pass
-        elif Node.value == val:
-            if Node.prev is not None:
-                Node = Node.prev
-                Node.next = Node.next.next
+        elif node.value == val:
+            if node.prev is not None:
+                node = node.prev
+                node.next = node.next.next
             else:
-                self.head = Node.next
-            if Node.next is not None:
-                Node = Node.next
-                Node.prev = Node.prev.prev
+                self.head = node.next
+            if node.next is not None:
+                node = node.next
+                node.prev = node.prev.prev
             else:
-                self.tail = Node
+                self.tail = node
         pass
 
     def clean(self):
@@ -106,10 +107,10 @@ class OrderedList:
 
     def len(self):
         l = 0
-        Node = self.head
-        while Node is not None:
+        node = self.head
+        while node is not None:
             l += 1
-            Node = Node.next
+            node = node.next
         return l
 
     def get_all(self):
@@ -138,5 +139,3 @@ class OrderedStringList(OrderedList):
             return 0
         else:
             return 1
-
-
