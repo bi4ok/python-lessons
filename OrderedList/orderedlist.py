@@ -9,7 +9,7 @@ class OrderedList:
     def __init__(self, asc):
         self.head = None
         self.tail = None
-        self.__ascending = asc
+        self.ascending = asc
 
     def compare(self, v1, v2):
         if v1.value < v2.value:
@@ -28,13 +28,13 @@ class OrderedList:
             value.next = None
             return
         node = self.head
-        if self.__ascending is True:
+        if self.ascending is True:
             if self.compare(value, node) == -1:         # Сравнение с первым элементом,замена head
                 self.head = value
                 node.prev = value
                 value.next = node
                 return
-        elif self.__ascending is False:
+        elif self.ascending is False:
             if self.compare(value, node) == 1:         # Сравнение с первым элементом,замена head
                 self.head = value
                 node.prev = value
@@ -47,7 +47,7 @@ class OrderedList:
             value.prev = node
             return
         while node is not None:
-            if self.__ascending is True:
+            if self.ascending is True:
                 if self.compare(value, node) == -1:     # Добавление элемента между тем который меньше и тем, который больше
                     x = node.prev
                     node.prev = value
@@ -55,7 +55,7 @@ class OrderedList:
                     value.next = node
                     value.prev.next = value
                     return
-            elif self.__ascending is False:
+            elif self.ascending is False:
                 if self.compare(value, node) == 1:     # Добавление элемента между тем который меньше и тем, который больше
                     x = node.prev
                     node.prev = value
@@ -76,9 +76,9 @@ class OrderedList:
         while node is not None:
             if node.value == val:
                 return node
-            elif self.__ascending is True and node.value > val:
+            elif self.ascending is True and node.value > val:
                 return None
-            elif self.__ascending is False and node.value < val:
+            elif self.ascending is False and node.value < val:
                 return None
             node = node.next
         return None
@@ -128,7 +128,7 @@ class OrderedStringList(OrderedList):
     def __init__(self, asc):
         self.head = None
         self.tail = None
-        self.__ascending = asc
+        self.ascending = asc
 
     def compare(self, v1, v2):
         x = str(v2.value)
@@ -141,16 +141,3 @@ class OrderedStringList(OrderedList):
             return 0
         else:
             return 1
-
-
-s1 = OrderedList(True)
-
-s1.add(5)
-s1.add(4)
-s1.add(3)
-s1.add(2)
-s1.add(1)
-
-print(s1.get_all(), s1.tail.value)
-s1.delete(5)
-print(s1.get_all(), s1.tail.value)
