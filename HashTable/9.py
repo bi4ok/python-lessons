@@ -6,6 +6,7 @@ class HashTable:
 
     def hash_fun(self, val):
         index = 0
+        val = str(val)
         for i in range(len(val)):
             if int(val[i]) != 0:
                 index += int(val[i]) * (i+1)
