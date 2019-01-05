@@ -35,6 +35,7 @@ class HashTable:
         x = self.seek_slot(value)
         if x is not None:
             self.slots[x] = value
+            return x
         else:
             return None
 
