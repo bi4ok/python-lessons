@@ -34,7 +34,7 @@ class HashTable:
     def put(self, value):
         x = self.seek_slot(value)
         if x is not None:
-            self.slots[x] = value
+            self.slots[x] = int(value)
             return x
         else:
             return None
