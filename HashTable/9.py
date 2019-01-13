@@ -26,7 +26,7 @@ class HashTable:
                 index += self.step
                 while index > self.size - 1:
                     index -= (self.size - 1)
-                if self.slots[index] == value:
+                if self.slots[index] is None:
                     return index
         return None
 
@@ -36,7 +36,6 @@ class HashTable:
             self.slots[x] = value
             return x
         else:
-            print("_______________________________________________________")
             return None
 
     def find(self, value):
@@ -45,15 +44,9 @@ class HashTable:
             if self.slots[index] == value:
                 return index
             else:
-                if index + self.step <= (self.size - 1):
-                    index += self.step
-                    if self.slots[index] == value:
-                        return index
-                else:
-                    x = self.step
-                    while x > (self.size - 1):
-                        x -= (self.size - 1)
-                    index = 0 + (index + x - self.size)
-                    if self.slots[index] == value:
-                        return index
+                index += self.step
+                while index > self.size - 1:
+                    index -= (self.size - 1)
+                if self.slots[index] == value:
+                    return index
         return None
