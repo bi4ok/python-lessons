@@ -6,12 +6,13 @@ class HashTable:
 
     def hash_fun(self, val):
         index = 0
-        if self.slots[index] is None:
-            return index
         val = str(val)
         for i in range(len(val)):
             if int(val[i]) != 0:
                 index += int(val[i]) * (i+1)
+            elif int(val) == 0:
+                index = 0
+                return index
             else:
                 index += (11 * (i + 1))
         index = index % self.size
