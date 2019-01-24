@@ -14,11 +14,13 @@ def odc4et(pt, sp):
 
     n = len(sp)/pt
     results = {}
+    treds = {}
     for i in range(pt):
-        x = Thread(target=s4et, name='Thread N'+str(i), args=('Id'+str(i), sp[int(n*i):int(n*(i+1))], results))
-        x.start()
-    while x.is_alive() is True:
-        time.sleep(0.5)
+        treds[i] = Thread(target=s4et, name='Thread N'+str(i), args=('Id'+str(i), sp[int(n*i):int(n*(i+1))], results))
+        treds[i].start()
+    for j in range(pt):
+        while treds[j].is_alive():
+            time.sleep(0.01)
     itog = 0
     for i in results:
         itog += results[i]
@@ -26,7 +28,7 @@ def odc4et(pt, sp):
 
 
 a = []
-for i in range(10000):
+for i in range(1000):
     a.append(random.randint(0, 1000))
 print(sum(a))
 s = odc4et(10, a)
