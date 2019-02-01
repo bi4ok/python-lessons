@@ -58,6 +58,8 @@ class HashTable:
 
     def put(self, value):
         x = self.seek_slot(value)
+        if x >= self.size:
+            print(x)
         if x is not None:
             self.slots[x] = value
             return x
@@ -79,7 +81,6 @@ class HashTable:
         return None
 
 
-s1 = HashTable(1700, 30)
-for i in range(1700):
-    s1.put(random.randint(0,5000))
-print(s1.kol)
+s1 = HashTable(17, 30)
+s1.put("256")
+print(s1.slots)
