@@ -1,84 +1,39 @@
-import unittest, random
-
-
-class AssociateTable:
-    def __init__(self, sz, stp):
+class NativeDictionary:
+    def __init__(self, sz):
         self.size = sz
-        self.step = stp
-        self.slots = [None]*self.size
-        self.values = [None]*self.size
+        self.slots = [None] * self.size
+        self.values = [None] * self.size
 
-    def hash_fun(self, val):
+    def hash_fun(self, key):
         index = 0
-        for i in range(len(val)):
-            if int(val[i]) != 0:
-                index += int(val[i]) * (i+1)
+        key = str(key)
+        for i in range(len(key)):
+            if int(key[i]) != 0:
+                index += int(key[i]) * (i+1)
+            elif int(key) == 0:
+                index = 0
+                return index
             else:
                 index += (11 * (i + 1))
-        index = index % self.size
+        if self.size != 0:
+            index = index % self.size
         return index
 
-    def put_value(self, key, item):
+    def is_key(self, key):
+        index = self.hash_fun(key)
+        if self.slots[index] == key:
+            return True
+        return False
+
+    def put(self, key, value):
         index = self.hash_fun(key)
         self.slots[index] = key
-        self.values[index] = item
-
-    def is_key(self, val):
-        index = self.hash_fun(val)
-        if self.slots[index] == val:
-            return index
-        return None
-
-    def del_all(self):
-        for i in range(self.size):
-            self.slots[i] = None
-            self.values[i] = None
-
-    def print_all(self):
-        for i in range(self.size):
-            print(self.slots[i], self.values[i])
+        self.values[index] = value
 
     def get(self, key):
         x = self.is_key(key)
-        if x is not None:
-            return self.values[x]
+        index = self.hash_fun(key)
+        if x is True:
+            return self.values[index]
         else:
             return None
-
-
-class TestMethods(unittest.TestCase):
-
-    def initialize(self):
-        self.s = AssociateTable(18, 5)
-        for i in range(self.s.size):
-            self.s.put_value(str(i), "number "+str(i))
-        return self.s
-
-    def test_putvalue(self):
-        self.initialize()
-        self.s.del_all()
-        self.s.put_value("123", "321")                      # Добавление значения по новому ключу
-        self.assertTrue(self.s.slots[14] == "123")
-        self.assertTrue(self.s.values[14] == "321")
-        self.s.put_value("123", "321")                      # Добавление значения по существующему ключу
-        self.assertTrue(self.s.slots[14] == "123")
-        self.assertTrue(self.s.values[14] == "321")
-        self.s.del_all()
-
-    def test_iskey(self):
-        self.initialize()
-        self.assertTrue(self.s.is_key("17") == 15)          # Проверка присутствующего ключа
-        self.assertTrue(self.s.is_key("20") is None)        # Проверка отсутствующего ключа
-        self.s.del_all()
-
-    def test_get(self):
-        self.initialize()
-        self.assertTrue(self.s.get("1") == "number 1")      # Проверка извлечения значения по существующему ключу
-        self.s.del_all()
-        self.assertTrue(self.s.get("1") is None)            # Проверка извлечения значения по отсутсвующему кллючу
-
-
-if __name__ == '__main__':
-    unittest.main()
-
-
