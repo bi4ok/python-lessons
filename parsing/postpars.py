@@ -2,12 +2,17 @@ from bs4 import BeautifulSoup
 import requests
 
 r = requests.post('http://httpbin.org/post', data = {'UserId':'12345', 'Status':'On'})
-print(r.status_code, r.reason)
+if r.status_code == 200:
+    print(r.status_code, 'vse ok')
+else:
+    print("ERROR", r.status_code)
 
 soup = 0
 response = requests.get('http://skillsmart.ru/auto/me_post.php')
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, features="html.parser")
+else:
+    print('ERROR', response.status_code)
 
 span_list = soup.find_all('div', {'class': 'T1'})
 
