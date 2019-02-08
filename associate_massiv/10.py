@@ -17,7 +17,8 @@ class NativeDictionary:
                 index += (11 * (i + 1))
         if self.size != 0:
             index = index % self.size
-        return index
+            return index
+        return 0
 
     def is_key(self, key):
         index = self.hash_fun(key)
