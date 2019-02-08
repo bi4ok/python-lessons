@@ -12,18 +12,14 @@ def s4et(id, sp4, res):
     res[id] = sum
 
 s = {}
-
-a = []
-for i in range(100):
-    a.append(random.randint(0, 1000))
-n = len(a)/10
-results = {}
-
-s[1] = Thread(target=s4et, name='Thread N'+str(1), args=('Id'+str(1), a[int(n*1):int(n*(1+1))], results))
-s[2] = Thread(target=s4et, name='Thread N'+str(2), args=('Id'+str(2), a[int(n*2):int(n*(2+1))], results))
+x = 'Id'+str(1)
+s[x] = 5
 print(s)
-s[1].start()
-while s[1].is_alive():
-    time.sleep(0.01)
-
-print(results)
+x = 0
+while x != 10:
+    x = 0
+    for i in range(10):
+        print(i)
+        x += 1
+    print(x)
+print(x)
