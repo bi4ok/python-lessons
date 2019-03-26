@@ -1,0 +1,16 @@
+import sys
+n = int(sys.stdin.readline().strip())
+
+
+def foo(s, l, r, pairs):
+    if l == pairs and r == pairs:
+        print(s)
+    else:
+        if l < pairs:
+            print("+",l,r)
+            foo(s + '(', l + 1, r, pairs)
+        if r < l:
+            print("-",l,r)
+            foo(s + ')', l, r + 1, pairs)
+
+foo('', 0, 0, n)
