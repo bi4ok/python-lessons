@@ -8,9 +8,9 @@ class NativeDictionary:
         index = 0
         key = str(key)
         for i in range(len(key)):
-            if int(key[i]) != 0:
-                index += int(key[i]) * (i+1)
-            elif int(key) == 0:
+            if ord(key[i]) != 0:
+                index += ord(key[i]) * (i+1)
+            elif ord(key) == 0:
                 index = 0
                 return index
             else:
@@ -38,3 +38,4 @@ class NativeDictionary:
             return self.values[index]
         else:
             return None
+
