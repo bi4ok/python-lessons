@@ -2,20 +2,23 @@ class PowerSet:
     def __init__(self, sz, stp):
         self.sizeps = sz
         self.step = stp
-        self.slots = [None]*self.sizeps
+        self.slots = []*self.sizeps
 
-    def hash_fun(self, value1):
+    def hash_fun(self, key):
         index = 0
-        if self.slots[0] is None:
-            return index
-        value = str(value1)
-        for i in range(len(value)):
-            if int(value[i]) != 0:
-                index += int(value[i]) * (i+1)
+        key = str(key)
+        for i in range(len(key)):
+            if ord(key[i]) != 0:
+                index += ord(key[i]) * (i+1)
+            elif ord(key) == 0:
+                index = 0
+                return index
             else:
                 index += (11 * (i + 1))
-        index = index % self.sizeps
-        return index
+        if self.size != 0:
+            index = index % self.sizeps
+            return index
+        return 0
 
     def seek_slot(self, value):
         index = self.hash_fun(value)
