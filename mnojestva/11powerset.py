@@ -1,128 +1,55 @@
 class PowerSet:
-    def __init__(self, sz, stp):
-        self.sizeps = sz
-        self.step = stp
-        self.slots = []*self.sizeps
-
-    def hash_fun(self, key):
-        index = 0
-        key = str(key)
-        for i in range(len(key)):
-            if ord(key[i]) != 0:
-                index += ord(key[i]) * (i+1)
-            elif ord(key) == 0:
-                index = 0
-                return index
-            else:
-                index += (11 * (i + 1))
-        if self.size != 0:
-            index = index % self.sizeps
-            return index
-        return 0
-
-    def seek_slot(self, value):
-        index = self.hash_fun(value)
-        for i in range(self.sizeps - 1):
-            if self.slots[index] == value:
-                return None
-            elif self.slots[index] is None:
-                return index
-            else:
-                if index + self.step <= (self.sizeps - 1):
-                    index += self.step
-                    if self.slots[index] == value:
-                        return None
-                    elif self.slots[index] is None:
-                        return index
-                elif index + self.step > self.sizeps-1:
-                    index = 0 + (index + self.step - self.sizeps)
-                    if self.slots[index] == value:
-                        return None
-                    elif self.slots[index] is None:
-                        return index
-        return None
+    def __init__(self):
+        self.slots = []
 
     def size(self):
-        x = 0
-        for i in range(self.sizeps):
-            if self.slots[i] is not None:
-                x += 1
+        x = len(self.slots)
         return x
 
     def put(self, value):
-        x = self.seek_slot(value)
-        if x is not None:
-            self.slots[x] = value
+        if value not in self.slots:
+            self.slots.append(value)
 
     def get(self, value):
-        index = self.hash_fun(value)
-        for i in range(self.sizeps - 1):
-            if self.slots[index] == value:
-                return True
-            else:
-                if index + self.step <= (self.sizeps - 1):
-                    index += self.step
-                    if self.slots[index] == value:
-                        return True
-                elif index + self.step > self.sizeps - 1:
-                    index = 0 + (index + self.step - self.sizeps)
-                    if self.slots[index] == value:
-                        return True
+        if value in self.slots:
+            return True
         return False
 
     def remove(self, value):
-        index = self.hash_fun(value)
-        for i in range(self.sizeps - 1):
-            if self.slots[index] == value:
-                self.slots[index] = None
-                return True
-            else:
-                if index + self.step <= (self.sizeps - 1):
-                    index += self.step
-                    if self.slots[index] == value:
-                        self.slots[index] = None
-                        return True
-                elif index + self.step > self.sizeps - 1:
-                    index = 0 + (index + self.step - self.sizeps)
-                    if self.slots[index] == value:
-                        self.slots[index] = None
-                        return True
+        if value in self.slots:
+            self.slots.remove(value)
+            return True
         return False
 
-    def intersection(self, set1):
-        if self.size() < set1.size():
-            set2 = PowerSet(self.sizeps, 5)
-            for i in range(self.sizeps):
-                if self.slots[i] is not None and set1.get(self.slots[i]) is True:
-                    set2.put(self.slots[i])
+    def intersection(self, set2):
+        inset = PowerSet()
+        if self.size() > set2.size():
+            for i in set2.slots:
+                if self.get(i) is True:
+                    inset.put(i)
         else:
-            set2 = PowerSet(set1.sizeps, 5)
-            for i in range(set1.sizeps):
-                if set1.slots[i] is not None and self.get(set1.slots[i]) is True:
-                    set2.put(set1.slots[i])
-        return set2
+            for i in self.slots:
+                if set2.get(i) is True:
+                    inset.put(i)
+        return inset
 
-    def union(self, set1):
-        set2 = PowerSet(self.sizeps+set1.sizeps, 5)
-        for i in range(self.sizeps):
-            if self.slots[i] is not None:
-                set2.put(self.slots[i])
-        for j in range(set1.sizeps):
-            if set1.slots[j] is not None:
-                set2.put(set1.slots[j])
-        return set2
+    def union(self, set2):
+        uset = PowerSet()
+        for i in self.slots:
+            uset.put(i)
+        for j in set2.slots:
+            uset.put(j)
+        return uset
 
-    def difference(self, set1):
-        set2 = PowerSet(self.sizeps, 5)
-        for i in range(self.sizeps):
-            if self.slots[i] is not None and self.slots[i] != set1.slots[i]:
-                set2.put(self.slots[i])
-        return set2
+    def difference(self, set2):
+        difset = self.union(set2)
+        dif = self.intersection(set2)
+        for i in dif.slots:
+            difset.remove(i)
+        return difset
 
     def issubset(self, set1):
         for i in set1.slots:
-            if i is not None:
-                if set1.get(i) is False and self.get(i) is True:
-                    print(i)
-                    return False
+            if self.get(i) is False:
+                return False
         return True
