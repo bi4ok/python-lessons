@@ -42,11 +42,11 @@ class PowerSet:
         return uset
 
     def difference(self, set2):
-        difset = self.union(set2)
-        dif = self.intersection(set2)
-        for i in dif.slots:
-            difset.remove(i)
-        return difset
+        dif = PowerSet()
+        for i in self.slots:
+            if set2.get(i) is False:
+                dif.put(i)
+        return dif
 
     def issubset(self, set1):
         for i in set1.slots:
