@@ -14,8 +14,8 @@ class Cache:
         index = 0
         val = str(val1)
         for i in range(len(val)):
-            if int(val[i]) != 0:
-                index += int(val[i]) * (i+1)
+            if ord(val[i]) != 0:
+                index += ord(val[i]) * (i+1)
             else:
                 index += (11 * (i + 1))
         index = index % self.size
