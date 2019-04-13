@@ -24,7 +24,7 @@ class SimpleTree:
         z = 0
         node = self.Root
         spisok = []
-        while node.NodeValue is not None:
+        while True:
             if node not in spisok:
                 spisok.append(node)
             if z < len(node.Children):
