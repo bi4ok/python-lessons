@@ -61,12 +61,28 @@ class BST:
     def DeleteNodeByKey(self, key):
         node = self.FindNodeByKey(key)
         if node.NodeHasKey is True:
-            zamena = self.FinMinMax(node.Node.RightChild, False)
-            if zamena.RightChild is not None:
-                zamena = zamena.RightChild
-                zamena.Parent.RightChild = None
+            if node.Node.RightChild is not None and node.Node.LeftChild is not None:
+                zamena = self.FinMinMax(node.Node.RightChild, False)
+                if zamena.RightChild is not None:
+                    zamena = zamena.RightChild
+                    zamena.Parent.RightChild = None
+                else:
+                    zamena.Parent.LeftChild = None
             else:
-                zamena.Parent.LeftChild = None
+                if node.Node.RightChild is not None:
+                    zamena = node.Node.RightChild
+                    node.Node.RightChild = zamena.RightChild
+                    node.Node.LeftChild = zamena.LeftChild
+                elif node.Node.LeftChild is not None:
+                    zamena = node.Node.LeftChild
+                    node.Node.RightChild = zamena.RightChild
+                    node.Node.LeftChild = zamena.LeftChild
+                else:
+                    zamena = node.Node
+                    if zamena.Parent.RightChild == zamena:
+                        zamena.Parent.RightChild = None
+                    else:
+                        zamena.Parent.LeftChild = None
             zamena.Parent = None
             node.Node.NodeKey = zamena.NodeKey
             node.Node.NodeValue = zamena.NodeValue
