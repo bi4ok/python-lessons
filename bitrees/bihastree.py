@@ -15,8 +15,8 @@ class BSTFind:
 
 
 class BST:
-    def __init__(self, root):
-        self.Root = root
+    def __init__(self, node):
+        self.Root = node
 
     def FindNodesByKey(self, key):
         node = BSTFind()
