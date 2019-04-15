@@ -18,7 +18,7 @@ class BST:
     def __init__(self, node):
         self.Root = node
 
-    def FindNodesByKey(self, key):
+    def FindNodeByKey(self, key):
         node = BSTFind()
         node.Node = self.Root
         while node.Node.NodeKey != key:
@@ -36,7 +36,7 @@ class BST:
         return node
 
     def AddKeyValue(self, key, val):
-        node = self.FindNodesByKey(key)
+        node = self.FindNodeByKey(key)
         innode = BSTNode(key, val, None)
         if node.NodeHasKey is False:
             if node.ToLeft is False:
@@ -58,7 +58,7 @@ class BST:
         return node
 
     def DeleteNodeByKey(self, key):
-        node = self.FindNodesByKey(key)
+        node = self.FindNodeByKey(key)
         if node.NodeHasKey is True:
             zamena = self.FinMinMax(node.Node.RightChild, False)
             if zamena.RightChild is not None:
