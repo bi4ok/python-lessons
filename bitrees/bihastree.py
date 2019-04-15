@@ -86,6 +86,7 @@ class BST:
             zamena.Parent = None
             node.Node.NodeKey = zamena.NodeKey
             node.Node.NodeValue = zamena.NodeValue
+            return True
         else:
             return False
 
