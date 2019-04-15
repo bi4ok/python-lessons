@@ -44,6 +44,7 @@ class BST:
             else:
                 node.Node.LeftChild = innode
             innode.Parent = node.Node
+            return True
         else:
             return False
 
