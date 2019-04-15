@@ -90,8 +90,5 @@ class BST:
         z = 0
         for i in len:
             if i is not None:
-                if i.LeftChild is not None or i.RightChild is not None:
-                    z += 1
-                elif i is self.Root:
                     z += 1
         return z
