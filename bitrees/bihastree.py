@@ -110,46 +110,53 @@ class BST:
                     z += 1
         return z
 
-    def WideAllNodes(self, l=0, spisok=[]):
-        if l == 0:
-            spisok = [self.Root]
-        s4et = l
-        for i in spisok[s4et:]:
-            if i.LeftChild is not None:
-                spisok.append(i.LeftChild)
-            if i.RightChild is not None:
-                spisok.append(i.RightChild)
-            s4et += 1
-        if s4et != len(spisok):
-            self.WideAllNodes(l=s4et, spisok=spisok)
-        return spisok
+    def WideAllNodes(self):
+        def shirina(l, spisok):
+            if l == 0:
+                spisok = [self.Root]
+            s4et = l
+            for i in spisok[s4et:]:
+                if i.LeftChild is not None:
+                    spisok.append(i.LeftChild)
+                if i.RightChild is not None:
+                    spisok.append(i.RightChild)
+                s4et += 1
+            if s4et != len(spisok):
+                shirina(l=s4et, spisok=spisok)
+            return spisok
+        return shirina(0, [])
 
-    def DeepAllNodes(self, order, node=0, spisok=[]):
-        if node == 0:
-            node = self.Root
+    def DeepAllNodes(self, order):
+        def glubina(order, node, spisok):
+            if node == 0:
+                node = self.Root
 
-        def levo():
-            if node.LeftChild is not None:
-                self.DeepAllNodes(order, node.LeftChild, spisok)
+            def levo():
+                if node.LeftChild is not None:
+                    glubina(order, node.LeftChild, spisok)
 
-        def centr():
-            if node not in spisok:
-                spisok.append(node)
+            def centr():
+                if node not in spisok:
+                    spisok.append(node)
 
-        def pravo():
-            if node.RightChild is not None:
-                self.DeepAllNodes(order, node.RightChild, spisok)
+            def pravo():
+                if node.RightChild is not None:
+                    glubina(order, node.RightChild, spisok)
 
-        deistviya = [levo, centr, pravo]
-        if order == 0:
-            for i in deistviya:
-                i()
-        elif order == 1:
-            deistviya[0]()
-            deistviya[2]()
-            deistviya[1]()
-        elif order == 2:
-            deistviya[1]()
-            deistviya[0]()
-            deistviya[2]()
-        return spisok
+            deistviya = [levo, centr, pravo]
+            if order == 0:
+                for i in deistviya:
+                    i()
+            elif order == 1:
+                deistviya[0]()
+                deistviya[2]()
+                deistviya[1]()
+            elif order == 2:
+                deistviya[1]()
+                deistviya[0]()
+                deistviya[2]()
+            rs = spisok
+            spisok = []
+            return rs
+        spisok = []
+        return glubina(order, self.Root, spisok)
