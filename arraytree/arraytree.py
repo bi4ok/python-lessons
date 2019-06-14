@@ -1,6 +1,3 @@
-import unittest
-
-
 class Node:
     def __init__(self, val):
         self.value = val
@@ -59,41 +56,3 @@ class ArrayTree:
                 return None
 
 
-class TestMethods(unittest.TestCase):
-
-    def initialize(self):
-        self.s = ArrayTree(7)
-        self.s.add_branch(Node(12))
-        self.s.add_branch(Node(16))
-        self.s.add_branch(Node(14))
-        self.s.add_branch(Node(8))
-
-    def test_poisk(self):
-        self.initialize()
-        self.s.add_branch(Node(20))
-        self.s.add_branch(Node(10))
-        self.assertTrue(self.s.poisk(self.s.root, Node(6)) == -3)       # Найдено свободное место
-        self.s.add_branch(Node(6))
-        self.assertTrue(self.s.poisk(self.s.root, Node(3)) is None)     # Все дерево пройдено,совпадений нет
-        self.assertTrue(self.s.poisk(self.s.root, Node(20)) == 6)       # Присутствующее значение
-        self.s = None
-
-    def test_add(self):
-        self.initialize()
-        self.assertTrue(self.s.poisk(self.s.root, Node(20)) == -6)      # Место под значение свободно
-        self.s.add_branch(Node(20))                                     # Значение добавлено
-        self.assertTrue(self.s.poisk(self.s.root, Node(20)) == 6)       # Место под значение занято
-        self.s.add_branch(Node(6))
-        self.s.add_branch(Node(10))
-        self.assertTrue(self.s.massiv[6].value == 20)                   # Соответствие значений индексам в массиве
-        self.assertTrue(self.s.massiv[5].value == 14)
-        self.assertTrue(self.s.massiv[4].value == 10)
-        self.assertTrue(self.s.massiv[3].value == 6)
-        self.assertTrue(self.s.massiv[2].value == 16)
-        self.assertTrue(self.s.massiv[1].value == 8)
-        self.assertTrue(self.s.massiv[0].value == 12)
-        self.s = None
-
-
-if __name__ == '__main__':
-    unittest.main()
