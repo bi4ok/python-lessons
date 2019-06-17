@@ -30,7 +30,6 @@ class ArrayTree:
             node = node.parent
             if node.value > val.value:
                 node.l = val
-                print("=")
             if node.value < val.value:
                 node.r = val
 
