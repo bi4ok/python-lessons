@@ -1,14 +1,13 @@
 def GenerateBBSTArray(a):
     balans_massiv = [None] * 3
     a = sorted(a)
-    global u
     u = 1
 
     def balansirovka(a, bm, x):
         if not a:
             return None
         if x >= len(bm):
-            global u
+            nonlocal u
             u += 1
             l1 = 2 ** (u + 1) - 1
             bm += ([None] * (l1 - len(bm)))
