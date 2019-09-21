@@ -1,22 +1,16 @@
 def GenerateBBSTArray(a):
-    balans_massiv = [None] * 3
+    balans_massiv = []
     a = sorted(a)
-    global u
-    u = 1
 
-    def balansirovka(a, bm, x):
+    def balansirovka(a, bm):
         if not a:
             return None
-        if x >= len(bm):
-            global u
-            u += 1
-            l1 = 2 ** (u + 1) - 1
-            bm += ([None] * (l1 - len(bm)))
         centr = int(len(a)/2)
-        bm[x] = a[centr]
-        balansirovka(a[:centr], bm, x * 2 + 1)
-        balansirovka(a[centr+1:], bm, x * 2 + 2)
+        bm.append(a[centr])
+        balansirovka(a[:centr], bm)
+        balansirovka(a[centr+1:], bm)
         return bm
 
-    balans_massiv = balansirovka(a, balans_massiv, 0)
+    balans_massiv = balansirovka(a, balans_massiv)
     return balans_massiv
+
