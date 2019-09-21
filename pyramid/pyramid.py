@@ -15,7 +15,7 @@ class Pyramid:
     def __init__(self, sz):
         self.root = None
         self.size = sz
-        self.massiv = [None]*self.size
+        self.massiv = [None] * self.size
         self.freeslot = None
 
     def add_branch(self, item):
@@ -25,12 +25,12 @@ class Pyramid:
             print(None)
             return None
         if self.massiv.index(item) != 0:
-            item.parent = self.massiv[abs(self.massiv.index(item)-1) // 2]
+            item.parent = self.massiv[abs(self.massiv.index(item) - 1) // 2]
         x = self.poisk(item)
         if item.parent is not None:
             item = item.parent
-            item.l = self.massiv[self.massiv.index(item)*2+1]
-            item.r = self.massiv[self.massiv.index(item)*2+2]
+            item.l = self.massiv[self.massiv.index(item) * 2 + 1]
+            item.r = self.massiv[self.massiv.index(item) * 2 + 2]
 
     def poisk(self, item):
         if item.parent is not None:
@@ -43,8 +43,8 @@ class Pyramid:
 
     def udaleniemax(self):
         if self.freeslot in self.massiv:
-            self.massiv[0].value = self.massiv[self.massiv.index(self.freeslot)-1].value
-            self.massiv[self.massiv.index(self.freeslot)-1] = None
+            self.massiv[0].value = self.massiv[self.massiv.index(self.freeslot) - 1].value
+            self.massiv[self.massiv.index(self.freeslot) - 1] = None
         else:
             self.massiv[0].value = self.massiv[-1].value
             self.massiv[-1] = None
@@ -79,21 +79,21 @@ class TestMethods(unittest.TestCase):
         self.s.add_branch(Node(5))
 
     def test_add(self):
-        self.initialize()                                                      # В массиве 9 элементов,индекс 9 свободен
-        self.assertTrue(self.s.massiv[9] is None)                              # Элемент перемещается к корню пирамиды
-        self.s.add_branch(Node(15))                                            # Элемент имеет значение меньше родителя
-        self.assertTrue(self.s.massiv[1].value == 15)                          # Но больше, чем у потомков
+        self.initialize()  # В массиве 9 элементов,индекс 9 свободен
+        self.assertTrue(self.s.massiv[9] is None)  # Элемент перемещается к корню пирамиды
+        self.s.add_branch(Node(15))  # Элемент имеет значение меньше родителя
+        self.assertTrue(self.s.massiv[1].value == 15)  # Но больше, чем у потомков
         self.assertTrue(self.s.massiv[1].value < self.s.massiv[1].parent.value)
         self.assertTrue(self.s.massiv[1].value > max(self.s.massiv[1].r.value, self.s.massiv[1].l.value))
         self.s = None
 
     def test_udalenie(self):
         self.initialize()
-        self.assertTrue(self.s.massiv[0].value == 16)               # Нулевой элемент равен 16
-        self.assertTrue(self.s.massiv[8].value == 5)                # Крайний правый на нижнем уровне элемент равен 5
+        self.assertTrue(self.s.massiv[0].value == 16)  # Нулевой элемент равен 16
+        self.assertTrue(self.s.massiv[8].value == 5)  # Крайний правый на нижнем уровне элемент равен 5
         self.s.udaleniemax()
-        self.assertTrue(self.s.massiv[0].value == 14)               # Нулевое элемент изменился на 14
-        self.assertTrue(self.s.massiv[8] is None)                   # Крайний правый элемент исчез
+        self.assertTrue(self.s.massiv[0].value == 14)  # Нулевое элемент изменился на 14
+        self.assertTrue(self.s.massiv[8] is None)  # Крайний правый элемент исчез
         self.s = None
 
 

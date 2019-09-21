@@ -10,4 +10,4 @@ else:
 
 span_list = soup.find_all('img', {'class': 'serp-item__thumb justifier__thumb'})
 
-print(span_list,soup)
+print(span_list, soup)
