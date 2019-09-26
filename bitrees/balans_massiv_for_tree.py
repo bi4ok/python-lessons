@@ -19,3 +19,4 @@ def GenerateBBSTArray(a):
 
     balans_massiv = balansirovka(a, balans_massiv, 0)
     return balans_massiv
+фыв
