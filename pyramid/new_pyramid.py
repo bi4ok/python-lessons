@@ -39,7 +39,6 @@ class Heap:
             if target and target > self.HeapArray[index]:
                 self.HeapArray[index], self.HeapArray[target_index] = \
                     self.HeapArray[target_index], self.HeapArray[index]
-                print(target_index, self.HeapArray)
                 sortik(target_index)
             else:
                 return None
@@ -48,7 +47,6 @@ class Heap:
             self.HeapArray[0] = None
             for i in range(len(self.HeapArray) - 1, -1, -1):
                 if self.HeapArray[i] or self.HeapArray[i] == 0:
-                    print(i, '+')
                     self.HeapArray[0], self.HeapArray[i] = self.HeapArray[i], self.HeapArray[0]
                     sortik(0)
                     break
