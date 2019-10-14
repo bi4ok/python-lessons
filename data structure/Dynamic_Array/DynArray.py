@@ -66,9 +66,12 @@ class DynArray:
 
 
 s1 = DynArray()
-for i in range(1070):
+for i in range(10):
     s1.append(i)
-for j in range(1070):
-    s1.delete(0)
-    print(s1.capacity, s1.count)
+
+s1.delete(0)
+
+for i in s1.array:
+    print(i)
+
 print()
