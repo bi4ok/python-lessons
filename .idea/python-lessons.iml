@@ -8,7 +8,11 @@
     <orderEntry type="library" name="R Skeletons" level="application" />
   </component>
   <component name="TestRunnerService">
+<<<<<<< HEAD
     <option name="projectConfiguration" value="Twisted Trial" />
     <option name="PROJECT_TEST_RUNNER" value="Twisted Trial" />
+=======
+    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
+>>>>>>> 307ff9d... new_pyramid
   </component>
 </module>
