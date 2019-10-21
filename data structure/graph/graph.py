@@ -44,7 +44,7 @@ class SimpleGraph:
     def RemoveVertex(self, v):
         if v in range(len(self.vertex)):
             for i in range(self.max_vertex):
-                self.RemoveEdge(self.vertex[v], self.vertex[i])
+                self.RemoveEdge(v, i)
             self.vertex[v] = None
         else:
             pass
