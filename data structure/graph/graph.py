@@ -12,9 +12,10 @@ class SimpleGraph:
 
     def AddVertex(self, v):
         if self.vertex[-1] is None:
-            self.vertex[self.vertex.index(None)] = Vertex(v)
+            index = self.vertex.index(None)
+            self.vertex[index] = Vertex(v)
             for i in range(self.max_vertex):
-                self.m_adjacency[v][i] = 0
+                self.m_adjacency[index][i] = 0
         else:
             pass
 
