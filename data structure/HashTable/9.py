@@ -61,8 +61,3 @@ class HashTable:
         return None
 
 
-s1 = HashTable(17, 3)
-for i in range(100):
-    s1.put(i)
-
-print(s1.put(12), s1.slots, s1.size, len(s1.slots))

@@ -23,7 +23,7 @@ class Stack:
         for i in range(len(s1)):
             if s1[i] == "(":
                 s2.push("(")
-            elif s1[i] == ")" and s2.peak() == "(":
+            elif s1[i] == ")" and s2.peek() == "(":
                 s2.pop()
         if s2.size() == 0:
             print("balans")
@@ -48,3 +48,5 @@ class Stack:
                 print("Sum = ", s2.pop())
             else:
                 s2.push(int(s1.pop()))
+
+
