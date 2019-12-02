@@ -80,27 +80,19 @@ class SimpleTree:
     def EvenTrees(self):
 
         def s4et(node, spisok):
-            print(spisok)
-            spisok.append(node.NodeValue)
+            spisok.append(node)
             if node.Children:
-                print(node.Children)
                 for children in node.Children:
                     spisok = s4et(children, spisok)
-                    print(spisok, node.NodeValue, "+")
                 return spisok
             else:
                 return spisok
-        print(s4et(self.Root, []))
 
-
-# s1 = SimpleTree(SimpleTreeNode(1, None))
-# s1.AddChild(s1.Root, SimpleTreeNode(2, None))
-# s1.AddChild(s1.Root, SimpleTreeNode(3, None))
-# s1.AddChild(s1.Root, SimpleTreeNode(4, None))
-# s1.AddChild(s1.Root.Children[0], SimpleTreeNode(5, None))
-# s1.AddChild(s1.Root.Children[1], SimpleTreeNode(6, None))
-# s1.AddChild(s1.Root.Children[2], SimpleTreeNode(7, None))
-# print(s1.EvenTrees())
-import os
-#print(os.path.dirname(__file__))
-print(os.path.dirname(__file__))
+        all_nodes = s4et(self.Root, [])
+        nodes_to_expire = []
+        for node in all_nodes:
+            for node_children in node.Children:
+                if not len(s4et(node_children, [])) % 2:
+                    nodes_to_expire.append(node)
+                    nodes_to_expire.append(node_children)
+        return nodes_to_expire
