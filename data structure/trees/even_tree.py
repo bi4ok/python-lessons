@@ -62,13 +62,7 @@ class SimpleTree:
             self.AddChild(NewParent, OriginalNode)
 
     def Count(self):
-        z = 0
-        for i in self.GetAllNodes():
-            if i is self.Root:
-                z += 1
-            elif len(i.Children) > 0:
-                z += 1
-        return z
+        return len(self.GetAllNodes())
 
     def LeafCount(self):
         z = 0
