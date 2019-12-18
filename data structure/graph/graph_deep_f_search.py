@@ -54,23 +54,22 @@ class SimpleGraph:
             if vert:
                 vert.Hit = False
         while True:
-            path.append(VFrom)
-            index = self.vertex.index(VFrom)
-            VFrom.Hit = True
+            cur_vert = self.vertex[VFrom]
+            path.append(cur_vert)
+            cur_vert.Hit = True
             if VFrom == VTo:
                 return path
-            for vert in self.vertex:
-                vert_index = self.vertex.index(vert)
-                if self.IsEdge(index, vert_index) and vert == VTo:
+            for vert_index, vert in enumerate(self.vertex):
+                if self.IsEdge(VFrom, vert_index) and vert == VTo:
                     path.append(vert)
                     return path
-            for vert in self.vertex:
-                vert_index = self.vertex.index(vert)
-                if self.IsEdge(index, vert_index) and not vert.Hit:
-                    VFrom = vert
+            for vert_index, vert in enumerate(self.vertex):
+                if self.IsEdge(VFrom, vert_index) and not vert.Hit:
+                    VFrom = vert_index
                     break
             else:
                 path.pop()
                 if not path:
                     return path
-                VFrom = path.pop()
+                next_vert = path.pop()
+                VFrom = self.vertex.index(next_vert)
