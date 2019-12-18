@@ -50,7 +50,9 @@ class SimpleGraph:
     def DepthFirstSearch(self, VFrom, VTo):
         path = stack.Stack()
         path.clear_stack()
-        self.clearing()
+        for vert in self.vertex:
+            if vert:
+                vert.hit = False
         while VFrom != VTo:
             print(VFrom.value, 'start')
             path.push(VFrom)
@@ -70,19 +72,3 @@ class SimpleGraph:
                 VFrom = path.pop()
             print(path)
         return path
-
-    def filter(self, spisok, item, sf):
-        for j in spisok:
-            if item == j[1]:
-                if j[1] not in sf:
-                    sf.insert(0, j[1])
-                if j[0] not in sf:
-                    sf.insert(0, j[0])
-                spisok.remove(j)
-                self.filter(spisok, j[0], sf)
-        return sf
-
-    def clearing(self):
-        for i in self.vertex:
-            if i:
-                i.hit = False
