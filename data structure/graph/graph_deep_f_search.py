@@ -1,5 +1,4 @@
 import stack
-import modstack
 
 
 class Vertex:
