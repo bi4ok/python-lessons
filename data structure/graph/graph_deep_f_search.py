@@ -53,7 +53,6 @@ class SimpleGraph:
             if vert:
                 vert.hit = False
         while VFrom != VTo:
-            print(VFrom.value, 'start')
             path.push(VFrom)
             VFrom.hit = True
             for vert in self.vertex:
@@ -67,7 +66,6 @@ class SimpleGraph:
             else:
                 check = path.pop()
                 if not check:
-                    return None
+                    return path
                 VFrom = path.pop()
-            print(path)
         return path
