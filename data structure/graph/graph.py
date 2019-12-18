@@ -48,3 +48,24 @@ class SimpleGraph:
             self.vertex[v] = None
         else:
             pass
+
+
+
+s1 = SimpleGraph(10)
+s1.AddVertex(0)
+s1.AddVertex(1)
+s1.AddVertex(2)
+s1.AddVertex(3)
+s1.AddVertex(4)
+s1.AddVertex(5)
+s1.AddEdge(0, 1)
+s1.AddEdge(0, 2)
+s1.AddEdge(1, 3)
+s1.AddEdge(2, 4)
+s1.AddEdge(4, 5)
+print(s1.IsEdge(0, 1))
+print(s1.vertex)
+for i in s1.m_adjacency:
+    print(i)
+for i in s1.DepthFirstSearch(s1.vertex[0], s1.vertex[5]):
+    print(i.Value)
