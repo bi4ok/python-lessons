@@ -13,7 +13,7 @@ class SimpleGraph:
             self.m_adjency.append([0]*self.max_vertex)
         self.vertex = [None]*self.max_vertex
 
-    def add_vert(self, item):
+    def AddVertex(self, item):
         if self.vertex[-1] is None:
             self.vertex[self.vertex.index(None)] = item
             for i in range(self.max_vertex):
@@ -21,26 +21,26 @@ class SimpleGraph:
         else:
             return None
 
-    def add_edge(self, item1, item2):
+    def AddEdge(self, item1, item2):
         if item1 and item2 is not None:
             self.m_adjency[self.vertex.index(item1)][self.vertex.index(item2)] = 1
             self.m_adjency[self.vertex.index(item2)][self.vertex.index(item1)] = 1
         else:
             return None
 
-    def check_edge(self, item1, item2):
+    def CheckEdge(self, item1, item2):
         if self.m_adjency[self.vertex.index(item1)][self.vertex.index(item2)] == 1:
             return True
         return False
 
-    def del_edge(self, item1, item2):
+    def DeleteEdge(self, item1, item2):
         if self.m_adjency[self.vertex.index(item1)][self.vertex.index(item2)] == 1:
             self.m_adjency[self.vertex.index(item1)][self.vertex.index(item2)] = 0
             self.m_adjency[self.vertex.index(item2)][self.vertex.index(item1)] = 0
 
-    def del_vert(self, item):
+    def DeleteVertex(self, item):
         for i in range(self.max_vertex):
-            self.del_edge(item, self.vertex[i])
+            self.DeleteEdge(item, self.vertex[i])
         self.vertex[self.vertex.index(item)] = None
 
     def DepthFirstSearch(self, VFrom, VTo):
@@ -52,11 +52,11 @@ class SimpleGraph:
             path.append(VFrom)
             VFrom.hit = True
             for vert in self.vertex:
-                if self.check_edge(VFrom, vert) and vert == VTo:
+                if self.CheckEdge(VFrom, vert) and vert == VTo:
                     path.append(vert)
                     return path
             for vert in self.vertex:
-                if self.check_edge(VFrom, vert) and not vert.hit:
+                if self.CheckEdge(VFrom, vert) and not vert.hit:
                     VFrom = vert
                     break
             else:
