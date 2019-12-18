@@ -47,17 +47,16 @@ class SimpleGraph:
         self.vertex[self.vertex.index(item)] = None
 
     def DepthFirstSearch(self, VFrom, VTo):
-        path = stack.Stack()
-        path.clear_stack()
+        path = []
         for vert in self.vertex:
             if vert:
                 vert.hit = False
         while VFrom != VTo:
-            path.push(VFrom)
+            path.append(VFrom)
             VFrom.hit = True
             for vert in self.vertex:
                 if self.check_edge(VFrom, vert) and vert == VTo:
-                    path.push(vert)
+                    path.append(vert)
                     return path
             for vert in self.vertex:
                 if self.check_edge(VFrom, vert) and not vert.hit:
