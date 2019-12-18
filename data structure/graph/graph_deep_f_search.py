@@ -48,9 +48,11 @@ class SimpleGraph:
         for vert in self.vertex:
             if vert:
                 vert.hit = False
-        while VFrom != VTo:
+        while True:
             path.append(VFrom)
             VFrom.hit = True
+            if VFrom == VTo:
+                return path
             for vert in self.vertex:
                 if self.CheckEdge(VFrom, vert) and vert == VTo:
                     path.append(vert)
@@ -60,8 +62,7 @@ class SimpleGraph:
                     VFrom = vert
                     break
             else:
-                check = path.pop()
-                if not check:
+                path.pop()
+                if not path:
                     return path
                 VFrom = path.pop()
-        return path
