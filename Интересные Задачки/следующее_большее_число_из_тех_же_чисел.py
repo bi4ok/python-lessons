@@ -1,15 +1,11 @@
-def next_numb(number):
-    start = number
+import time
 
-    list_of_numbers = list(str(number))
-    while len(list_of_numbers):
-        if list_of_numbers[0] == max(list_of_numbers):
-            list_of_numbers.pop(0)
-        else:
-            break
-    else:
+
+def next_numb(number):
+    if int("".join(sorted(str(number), reverse=True))) == number:
         return -1
 
+    start = number
     while len(str(start)) == len(str(number)):
         start += 1
         for number_in in str(start):
@@ -20,4 +16,28 @@ def next_numb(number):
     return -1
 
 
-print(next_numb(144))
+start = time.monotonic()
+print(next_numb(123454321))
+end = time.monotonic()
+print(end - start, start, end)
+
+
+def next_numb2(number):
+    rev_numb = number[::-1]
+    for index_s, start in enumerate(rev_numb):
+        for index_e, end in enumerate(rev_numb):
+            if index_e <= index_s:
+                continue
+            if start > end:
+                rev_numb = list(rev_numb)
+                rev_numb[index_e], rev_numb[index_s] = rev_numb[index_s], rev_numb[index_e]
+                rev_numb = sorted(rev_numb[:index_e], reverse=True) + rev_numb[index_e:]
+                return ''.join(rev_numb[::-1])
+        else:
+            return -1
+
+
+start = time.monotonic()
+print(next_numb2('123454321'))
+end = time.monotonic()
+print(end - start, start, end)
