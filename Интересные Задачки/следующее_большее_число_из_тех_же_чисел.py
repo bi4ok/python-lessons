@@ -16,12 +16,6 @@ def next_numb(number):
     return -1
 
 
-start = time.monotonic()
-print(next_numb(123454321))
-end = time.monotonic()
-print(end - start, start, end)
-
-
 def next_numb2(number):
     rev_numb = number[::-1]
     for index_s, start in enumerate(rev_numb):
@@ -35,9 +29,3 @@ def next_numb2(number):
                 return ''.join(rev_numb[::-1])
         else:
             return -1
-
-
-start = time.monotonic()
-print(next_numb2('123454321'))
-end = time.monotonic()
-print(end - start, start, end)

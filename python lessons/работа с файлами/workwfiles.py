@@ -45,5 +45,6 @@ class TestMethods(unittest.TestCase):
         self.assertTrue(len(vernutvse('test_dir')[0]) == 0)
 
 
+a = 2
 if __name__ == '__main__':
     unittest.main()
