@@ -29,3 +29,4 @@ def next_numb2(number):
                 return ''.join(rev_numb[::-1])
         else:
             return -1
+1

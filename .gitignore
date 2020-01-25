@@ -101,6 +101,7 @@ venv.bak/
 /site
 
 # mypy
+.idea
 .mypy_cache/
 10/.idea/workspace.xml
 *.xml
